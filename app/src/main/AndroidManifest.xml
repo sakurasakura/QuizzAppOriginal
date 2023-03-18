@@ -12,8 +12,11 @@
         android:theme="@style/Theme.QuizzApp"
         tools:targetApi="31">
         <activity
-            android:name=".Activities.UC03_TaoQuiz"
+            android:name=".DrawerBaseActivity"
             android:exported="false" />
+        <activity
+            android:name=".Activities.UC03_TaoQuiz"
+            android:exported="true" />
         <activity
             android:name=".WorkflowAdmin"
             android:exported="false" />
