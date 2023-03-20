@@ -10,6 +10,7 @@ public class User {
     String birthday;
     String gender;
     ArrayList<String> listQuiz;
+    boolean isActive;
     public User() {
     }
 
@@ -35,6 +36,17 @@ public class User {
         this.password = password;
         this.birthday = birthday;
         this.gender = gender;
+    }
+
+    public User(boolean isAdmin, String username, String password, String avatar, String birthday, String gender, ArrayList<String> listQuiz, boolean isActive) {
+        this.isAdmin = isAdmin;
+        this.username = username;
+        this.password = password;
+        this.avatar = avatar;
+        this.birthday = birthday;
+        this.gender = gender;
+        this.listQuiz = listQuiz;
+        this.isActive = isActive;
     }
 
     public boolean isAdmin() {

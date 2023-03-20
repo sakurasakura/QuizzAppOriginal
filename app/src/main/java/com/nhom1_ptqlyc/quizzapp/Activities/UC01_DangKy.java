@@ -59,6 +59,9 @@ public class UC01_DangKy extends AppCompatActivity {
                     map.put("isAdmin", false);
                     map.put("birth", birth);
                     map.put("gender", gender);
+                    map.put("listQuiz", null);
+                    map.put("avatar", null);
+                    map.put("isActive", true);
 
                     db.collection("users").add(map).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                         @Override

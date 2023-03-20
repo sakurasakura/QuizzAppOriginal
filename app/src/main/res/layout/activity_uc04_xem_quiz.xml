@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.UC04_XemQuiz">
+<ImageView
+    android:scaleType="centerCrop"
+    android:src="@drawable/default_image"
+    android:id="@+id/imageView_xemQuizHinhAnh"
+    android:layout_marginTop="30dp"
+    android:layout_marginBottom="10dp"
+    android:layout_centerHorizontal="true"
+    android:layout_width="250dp"
+    android:layout_height="250dp"/>
+    <TextView
+        android:id="@+id/textView_tenQuiz"
+        android:text="Tên quiz"
+        android:textSize="25sp"
+        android:layout_marginVertical="10dp"
+        android:textAllCaps="true"
+        android:textStyle="bold"
+        android:textColor="@color/third_purple"
+        android:layout_below="@+id/imageView_xemQuizHinhAnh"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <LinearLayout
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/textView_tenQuiz"
+        android:id="@+id/layout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:src="@drawable/icon_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/textView_user"
+            android:textColor="@color/second_purple"
+            android:textSize="15sp"
+            android:text="this is user account"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/layout2"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/layout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_marginHorizontal="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@drawable/icon_doquiz"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/textView_luotLam"
+                android:textColor="@color/second_purple"
+                android:textSize="15sp"
+                android:text="100"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginHorizontal="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@drawable/icon_commentsection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/textView_luotBinhLuan"
+                android:textColor="@color/second_purple"
+                android:textSize="15sp"
+                android:text="100"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginHorizontal="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@drawable/icon_averagerating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/textView_ratingTrungBinh"
+                android:textColor="@color/second_purple"
+                android:textSize="15sp"
+                android:text="20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/layout3"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/layout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@drawable/icon_timer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/textView_timer"
+                android:textColor="@color/second_purple"
+                android:textSize="15sp"
+                android:text="5 phút"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:textStyle="italic"
+                android:layout_marginHorizontal="10dp"
+                android:text="lịch sử"
+                android:paddingHorizontal="7dp"
+                android:textColor="@color/white"
+                android:background="@color/third_purple"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+    <Button
+        android:id="@+id/button_lamQuiz"
+        android:layout_margin="40dp"
+        android:backgroundTint="@color/third_purple"
+        android:layout_below="@+id/layout3"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:text="LÀM QUIZ"
+        android:layout_height="wrap_content"/>
+</RelativeLayout>

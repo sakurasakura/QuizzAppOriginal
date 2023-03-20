@@ -88,6 +88,7 @@ public class UC02_DangNhap extends AppCompatActivity {
     void saveUserPre(User user, String id){
         SharedPreferences preferences = getSharedPreferences("user_data", MODE_PRIVATE);
         SharedPreferences.Editor editor= preferences.edit();
+        editor.clear();
         editor.putString("username", user.getUsername());
         editor.putString("password", user.getPassword());
         editor.putString("birthday", user.getBirthday());

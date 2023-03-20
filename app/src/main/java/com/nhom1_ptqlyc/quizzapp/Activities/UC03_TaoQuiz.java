@@ -36,6 +36,8 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -44,6 +46,7 @@ import com.google.type.DateTime;
 import com.nhom1_ptqlyc.quizzapp.DrawerBaseActivity;
 import com.nhom1_ptqlyc.quizzapp.R;
 import com.nhom1_ptqlyc.quizzapp.databinding.ActivityUc03TaoQuizBinding;
+import com.nhom1_ptqlyc.quizzapp.objects.BinhLuan;
 import com.nhom1_ptqlyc.quizzapp.objects.CauHoi;
 import com.nhom1_ptqlyc.quizzapp.objects.CauTraLoi;
 import com.nhom1_ptqlyc.quizzapp.objects.Quiz;
@@ -55,6 +58,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class UC03_TaoQuiz extends DrawerBaseActivity {
     ActivityUc03TaoQuizBinding binding;
@@ -64,6 +69,7 @@ public class UC03_TaoQuiz extends DrawerBaseActivity {
     final int GALLERY_REQ_CODE=1000;
     Uri imgURI;
     String hinhAnh;
+    String userID;
     ActivityResultLauncher<Intent> launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
                 @Override
@@ -160,7 +166,7 @@ public class UC03_TaoQuiz extends DrawerBaseActivity {
         SharedPreferences preferences=getSharedPreferences("user_data",MODE_PRIVATE);
 
         String tenQuiz = ((EditText)binding.edtTenQuiz).getText().toString();
-        String ngTao = preferences.getString("username","");
+        userID = preferences.getString("id","");
         long luotlam=0;
         float rating =0;
         hinhAnh="";
@@ -174,7 +180,7 @@ public class UC03_TaoQuiz extends DrawerBaseActivity {
         FirebaseFirestore db= FirebaseFirestore.getInstance();
         CollectionReference reference = db.collection("Quiz");
         StorageReference storageReference = FirebaseStorage.getInstance().getReference();
-        StorageReference photoRef= storageReference.child("image/"+ngTao+'/'+now.getTime());
+        StorageReference photoRef= storageReference.child("image/"+userID+'/'+now.getTime());
         UploadTask uploadTask=photoRef.putFile(imgURI);
         uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
@@ -200,9 +206,10 @@ public class UC03_TaoQuiz extends DrawerBaseActivity {
             public void onSuccess(Uri uri) {
                     hinhAnh=uri.toString();
                     Log.d("complete uri", hinhAnh);
-                Quiz newquiz= new Quiz(tenQuiz,ngTao,hinhAnh,tenDeTai,ngayTao,luotlam,rating,thoigian,soCauHoi,listCauHoi);
+                Quiz newquiz= new Quiz(tenQuiz,userID,hinhAnh,tenDeTai,ngayTao,luotlam,rating,thoigian,soCauHoi,listCauHoi);
                 // Toast.makeText(this, hinhAnh+"", Toast.LENGTH_SHORT).show();
-                reference.add(newquiz);
+                //reference.add(newquiz);
+                addQuizToDataBase(newquiz);
             }
         });
 //                .addOnCompleteListener(new OnCompleteListener<Uri>() {
@@ -217,6 +224,22 @@ public class UC03_TaoQuiz extends DrawerBaseActivity {
 //                }
 //            }
 //        });
+
+    }
+    void addQuizToDataBase(Quiz quiz){
+        FirebaseFirestore db= FirebaseFirestore.getInstance();
+        CollectionReference reference = db.collection("Quiz");
+        reference.add(quiz).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            @Override
+            public void onSuccess(DocumentReference documentReference) {
+                String quizID= documentReference.getId();
+                DocumentReference reference1 = db.collection("users").document(userID);
+                reference1.update("listQuiz", FieldValue.arrayUnion(quizID));
+                Map<String,Object> map=new HashMap<>();
+                map.put("listBinhLuan",new ArrayList<BinhLuan>());
+                db.collection("Comment").document(quizID).set(map);
+            }
+        });
 
     }
 }
