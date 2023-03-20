@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="30dp"
+    android:padding="5dp">
+
+    <EditText
+        android:id="@+id/editText_nhapCauHoi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittext_background_purplestroke"
+        android:hint="1+1=?"
+        android:padding="10dp"
+        android:textColorHint="@color/first_purple"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tv1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editText_nhapCauHoi"
+        android:layout_marginVertical="5dp"
+
+        android:text="Nhập câu trả lời:"
+        android:textColor="@color/second_purple"
+        android:textStyle="italic" />
+
+    <RelativeLayout
+        android:id="@+id/layout_cauTraLoi1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv1"
+        android:padding="5dp">
+
+
+        <EditText
+            android:id="@+id/editText_nhapCauTraLoi1"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/edittext_background_purplestroke"
+            android:hint="2"
+            android:padding="10dp"
+            android:textColorHint="@color/first_purple"
+            android:textSize="15dp" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup_cauTraLoi1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/second_purple"
+                android:text="Đúng" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/second_purple"
+                android:text="Sai" />
+        </RadioGroup>
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/layout_cauTraLoi2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout_cauTraLoi1"
+        android:padding="5dp">
+
+
+        <EditText
+            android:id="@+id/editText_nhapCauTraLoi2"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/edittext_background_purplestroke"
+            android:hint="3"
+            android:padding="10dp"
+            android:textColorHint="@color/first_purple"
+            android:textSize="15dp" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup_cauTraLoi2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/second_purple"
+                android:text="Đúng" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/second_purple"
+                android:text="Sai" />
+        </RadioGroup>
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/layout_cauTraLoi3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout_cauTraLoi2"
+        android:padding="5dp">
+
+
+        <EditText
+            android:id="@+id/editText_nhapCauTraLoi3"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/edittext_background_purplestroke"
+            android:hint="4"
+            android:padding="10dp"
+            android:textColorHint="@color/first_purple"
+            android:textSize="15dp" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup_cauTraLoi3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/second_purple"
+                android:text="Đúng" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/second_purple"
+                android:text="Sai" />
+        </RadioGroup>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

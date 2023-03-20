@@ -1,5 +1,7 @@
 package com.nhom1_ptqlyc.quizzapp.objects;
 
+import java.util.ArrayList;
+
 public class User {
     boolean isAdmin;
     String username;
@@ -7,17 +9,18 @@ public class User {
     String avatar;
     String birthday;
     String gender;
-
+    ArrayList<String> listQuiz;
     public User() {
     }
 
-    public User(boolean isAdmin, String username, String password, String avatar, String birthday, String gender) {
+    public User(boolean isAdmin, String username, String password, String avatar, String birthday, String gender, ArrayList<String> list) {
         this.isAdmin = isAdmin;
         this.username = username;
         this.password = password;
         this.avatar = avatar;
         this.birthday = birthday;
         this.gender = gender;
+        this.listQuiz=list;
     }
 
     public User(boolean isAdmin, String username, String password) {
@@ -80,5 +83,13 @@ public class User {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public ArrayList<String> getListQuiz() {
+        return listQuiz;
+    }
+
+    public void setListQuiz(ArrayList<String> listQuiz) {
+        this.listQuiz = listQuiz;
     }
 }

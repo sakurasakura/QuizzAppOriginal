@@ -2,11 +2,11 @@ package com.nhom1_ptqlyc.quizzapp.objects;
 
 public class CauTraLoi {
     String noiDung;
-    boolean dungSai;
+    String dungSAi;
 
-    public CauTraLoi(String noiDung, boolean dungSai) {
+    public CauTraLoi(String noiDung, String dungSAi) {
         this.noiDung = noiDung;
-        this.dungSai = dungSai;
+        this.dungSAi = dungSAi;
     }
 
     public String getNoiDung() {
@@ -17,11 +17,11 @@ public class CauTraLoi {
         this.noiDung = noiDung;
     }
 
-    public boolean isDungSai() {
-        return dungSai;
+    public String getDungSAi() {
+        return dungSAi;
     }
 
-    public void setDungSai(boolean dungSai) {
-        this.dungSai = dungSai;
+    public void setDungSAi(String dungSAi) {
+        this.dungSAi = dungSAi;
     }
 }

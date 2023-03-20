@@ -1,28 +1,34 @@
 package com.nhom1_ptqlyc.quizzapp.objects;
 
+import java.util.ArrayList;
+
 public class Quiz {
     String ten;
     String nguoiTao;
-    String hinhAnh;
+    String hinhAnhURL;
     String chuDe;
     String ngayTao;
     long luotLam;
     float rating;
     int gioiHanThoiGian;
     int soLuongCauHoi;
-    int soLuongCauTraLoi;
 
-    public Quiz(String ten, String nguoiTao, String hinhAnh, String chuDe, String ngayTao, long luotLam, float rating, int gioiHanThoiGian, int soLuongCauHoi, int soLuongCauTraLoi) {
+    ArrayList<CauHoi> listCauHoi;
+
+    public Quiz() {
+    }
+
+    public Quiz(String ten, String nguoiTao, String hinhAnhURL, String chuDe, String ngayTao, long luotLam, float rating, int gioiHanThoiGian, int soLuongCauHoi, ArrayList<CauHoi> listCauHoi) {
         this.ten = ten;
         this.nguoiTao = nguoiTao;
-        this.hinhAnh = hinhAnh;
+        this.hinhAnhURL = hinhAnhURL;
         this.chuDe = chuDe;
         this.ngayTao = ngayTao;
         this.luotLam = luotLam;
         this.rating = rating;
         this.gioiHanThoiGian = gioiHanThoiGian;
         this.soLuongCauHoi = soLuongCauHoi;
-        this.soLuongCauTraLoi = soLuongCauTraLoi;
+        this.listCauHoi = listCauHoi;
     }
 
     public String getTen() {
@@ -41,12 +47,12 @@ public class Quiz {
         this.nguoiTao = nguoiTao;
     }
 
-    public String getHinhAnh() {
-        return hinhAnh;
+    public String getHinhAnhURL() {
+        return hinhAnhURL;
     }
 
-    public void setHinhAnh(String hinhAnh) {
-        this.hinhAnh = hinhAnh;
+    public void setHinhAnhURL(String hinhAnhURL) {
+        this.hinhAnhURL = hinhAnhURL;
     }
 
     public String getChuDe() {
@@ -97,11 +103,11 @@ public class Quiz {
         this.soLuongCauHoi = soLuongCauHoi;
     }
 
-    public int getSoLuongCauTraLoi() {
-        return soLuongCauTraLoi;
+    public ArrayList<CauHoi> getListCauHoi() {
+        return listCauHoi;
     }
 
-    public void setSoLuongCauTraLoi(int soLuongCauTraLoi) {
-        this.soLuongCauTraLoi = soLuongCauTraLoi;
+    public void setListCauHoi(ArrayList<CauHoi> listCauHoi) {
+        this.listCauHoi = listCauHoi;
     }
 }

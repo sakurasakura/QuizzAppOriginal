@@ -29,10 +29,10 @@ public class MainActivity extends AppCompatActivity {
         }else {
             boolean isAdmin = preferences.getBoolean("isAdmin", false);
             if (isAdmin) {
-                Intent intent = new Intent(getApplicationContext(), WorkflowAdmin.class);
+                Intent intent = new Intent(getApplicationContext(), HomeAdmin.class);
                 startActivity(intent);
             } else {
-                Intent intent = new Intent(getApplicationContext(), WorkflowUser.class);
+                Intent intent = new Intent(getApplicationContext(), HomeUser.class);
                 startActivity(intent);
 
             }

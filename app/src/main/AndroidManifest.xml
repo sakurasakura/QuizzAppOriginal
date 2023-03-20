@@ -12,17 +12,17 @@
         android:theme="@style/Theme.QuizzApp"
         tools:targetApi="31">
         <activity
+            android:name=".HomeAdmin"
+            android:exported="false" />
+        <activity
+            android:name=".HomeUser"
+            android:exported="false" />
+        <activity
             android:name=".DrawerBaseActivity"
             android:exported="false" />
         <activity
             android:name=".Activities.UC03_TaoQuiz"
             android:exported="true" />
-        <activity
-            android:name=".WorkflowAdmin"
-            android:exported="false" />
-        <activity
-            android:name=".WorkflowUser"
-            android:exported="false" />
         <activity
             android:name=".Activities.UC02_DangNhap"
             android:exported="true" />

@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/drawerLayout_User"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:openDrawer="end"
     android:fitsSystemWindows="true"
-    tools:context=".WorkflowUser">
-    <FrameLayout
-        android:id="@+id/workflowUser_frame"
+    tools:context=".DrawerBaseActivity">
+    <include android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        layout="@layout/content_layout"/>
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/nav_view"
+        android:paddingTop="50dp"
         android:layout_width="wrap_content"
-        android:layout_gravity="end"
-        app:menu="@menu/toolbar_menu"
         android:fitsSystemWindows="true"
+        android:layout_gravity="end"
+        android:id="@+id/nav_view"
+        app:itemTextColor="@color/third_purple"
+        app:menu="@menu/toolbar_menu"
+        app:headerLayout="@layout/drawer_header"
         android:layout_height="match_parent"/>
+
 </androidx.drawerlayout.widget.DrawerLayout>
