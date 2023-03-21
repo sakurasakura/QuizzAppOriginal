@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/textView_thuTuCauHoi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Câu 1: "
+        android:textColor="@color/third_purple"
+        android:textSize="20sp"
+        android:textStyle="bold|italic" />
+
+    <TextView
+        android:id="@+id/textView_ndCauHoi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/textView_thuTuCauHoi"
+        android:text="1+1=?"
+        android:textColor="@color/third_purple"
+        android:textSize="20sp" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup_cauTraLoi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView_thuTuCauHoi"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/radioButton_dapAn1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/third_purple"
+            android:text="1"
+            android:textColor="@color/third_purple"
+            android:textSize="20sp" />
+        <RadioButton
+            android:id="@+id/radioButton_dapAn2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/third_purple"
+            android:text="2"
+            android:textColor="@color/third_purple"
+            android:textSize="20sp" />
+        <RadioButton
+            android:id="@+id/radioButton_dapAn3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/third_purple"
+            android:text="3"
+            android:textColor="@color/third_purple"
+            android:textSize="20sp" />
+    </RadioGroup>
+</RelativeLayout>

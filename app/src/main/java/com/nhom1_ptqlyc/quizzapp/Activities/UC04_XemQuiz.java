@@ -2,6 +2,7 @@ package com.nhom1_ptqlyc.quizzapp.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 
@@ -26,9 +27,14 @@ import java.util.ArrayList;
 
 public class UC04_XemQuiz extends DrawerBaseActivity {
     ActivityUc04XemQuizBinding binding;
-    String QuizID= "weEDEMHSHvZIPdVUJRaz";
+    String QuizID= "DU7BnWlM8okCt7cOYg1D";
     Quiz quiz;
     String tenQuiz;
+    String luotLam;
+    String rating;
+    String thoiGian;
+    String chuDe;
+    String nguoiTao;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +42,6 @@ public class UC04_XemQuiz extends DrawerBaseActivity {
         setContentView(binding.getRoot());
         allocateActivityName("LÀM QUIZ");
         quiz= new Quiz();
-        ArrayList<BinhLuan> listBinhLuan;
 
         FirebaseFirestore db=FirebaseFirestore.getInstance();
         Task<DocumentSnapshot> document= db.collection("Quiz").document(QuizID).get()
@@ -45,18 +50,54 @@ public class UC04_XemQuiz extends DrawerBaseActivity {
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         DocumentSnapshot documentSnapshot=task.getResult();
                         quiz=documentSnapshot.toObject(Quiz.class);
+                        Log.e("Lỗi lấy quiz", quiz.getNguoiTao());
+                        setQuiz(quiz);
                     }
                 });
 
-        tenQuiz=quiz.getTen();
-        binding.textViewTenQuiz.setText(tenQuiz);
-        Picasso.get().load(quiz.getHinhAnhURL()).into(binding.imageViewXemQuizHinhAnh);
 
 
         binding.buttonLamQuiz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),UC05_LamQuiz.class);
+                intent.putExtra("KEY_QUIZ",quiz);
+                if (quiz==null){
+                    Log.e("button làm quiz", "quiz null");
+                }else {
+                    startActivity(intent);
+                }
             }
         });
+    }
+    void setQuiz(Quiz quiz){
+        nguoiTao= quiz.getNguoiTao();
+        Log.d("Id ng tao:", nguoiTao+"");
+        FirebaseFirestore db =FirebaseFirestore.getInstance();
+        Task<DocumentSnapshot> document2= db.collection("users").document(nguoiTao).get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        DocumentSnapshot documentSnapshot=task.getResult();
+                        nguoiTao=documentSnapshot.get("username",String.class);
+                        tenQuiz=quiz.getTen();
+                        luotLam=String.valueOf(quiz.getLuotLam());
+                        rating=String.valueOf(quiz.getRating());
+                        thoiGian=String.valueOf(quiz.getGioiHanThoiGian());
+                        chuDe=quiz.getChuDe();
+                        binding.textViewTenQuiz.setText(tenQuiz);
+                        binding.textViewUser.setText(nguoiTao);
+                        binding.textViewLuotLam.setText(luotLam);
+                        binding.textViewRatingTrungBinh.setText(rating);
+                        binding.textViewTimer.setText(thoiGian);
+                        binding.textViewChuDe.setText(chuDe);
+                        Picasso.get().load(quiz.getHinhAnhURL()).into(binding.imageViewXemQuizHinhAnh);
+                    }
+                });
+
+
+
+
+
     }
 }

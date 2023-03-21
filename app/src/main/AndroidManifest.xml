@@ -12,6 +12,9 @@
         android:theme="@style/Theme.QuizzApp"
         tools:targetApi="31">
         <activity
+            android:name=".Activities.UC05_LamQuiz"
+            android:exported="false" />
+        <activity
             android:name=".Activities.UC04_XemQuiz"
             android:exported="true" />
         <activity

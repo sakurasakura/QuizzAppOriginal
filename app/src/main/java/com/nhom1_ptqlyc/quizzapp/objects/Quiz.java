@@ -1,8 +1,9 @@
 package com.nhom1_ptqlyc.quizzapp.objects;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Quiz {
+public class Quiz implements Serializable {
     String ten;
     String nguoiTao;
     String hinhAnhURL;

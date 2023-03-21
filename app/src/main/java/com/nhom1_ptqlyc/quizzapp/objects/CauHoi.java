@@ -1,10 +1,14 @@
 package com.nhom1_ptqlyc.quizzapp.objects;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class CauHoi {
+public class CauHoi implements Serializable {
     String noiDung;
     ArrayList<CauTraLoi> listCauTraLoi;
+
+    public CauHoi() {
+    }
 
     public CauHoi(String noiDung, ArrayList<CauTraLoi> listCauTraLoi) {
         this.noiDung = noiDung;

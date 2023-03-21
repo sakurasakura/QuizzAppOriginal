@@ -1,8 +1,13 @@
 package com.nhom1_ptqlyc.quizzapp.objects;
 
-public class CauTraLoi {
+import java.io.Serializable;
+
+public class CauTraLoi implements Serializable {
     String noiDung;
     String dungSAi;
+
+    public CauTraLoi() {
+    }
 
     public CauTraLoi(String noiDung, String dungSAi) {
         this.noiDung = noiDung;
