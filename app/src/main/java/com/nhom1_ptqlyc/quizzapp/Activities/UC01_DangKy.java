@@ -60,7 +60,6 @@ public class UC01_DangKy extends AppCompatActivity {
                     map.put("birth", birth);
                     map.put("gender", gender);
                     map.put("listQuiz", null);
-                    map.put("listQuizDaLam", null);
                     map.put("avatar", null);
                     map.put("isActive", true);
 

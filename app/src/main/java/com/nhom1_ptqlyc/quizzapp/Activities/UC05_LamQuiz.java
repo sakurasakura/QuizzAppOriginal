@@ -26,6 +26,7 @@ public class UC05_LamQuiz extends DrawerBaseActivity {
     LamQuizAdapter adapter;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,7 +96,9 @@ public class UC05_LamQuiz extends DrawerBaseActivity {
 
 
         }
-        Log.d("Diem so", String.valueOf(diem));
+
+        String tongDiem= String.format("%.2f",((float)diem/quiz.getSoLuongCauHoi())*10);
+        Log.d("Diem so", String.valueOf(tongDiem));
     }
     void updateTimeText(long timeInMili){
         int Minute = (int) timeInMili / 1000 / 60;
