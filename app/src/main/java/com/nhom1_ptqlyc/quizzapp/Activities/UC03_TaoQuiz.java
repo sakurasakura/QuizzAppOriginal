@@ -64,7 +64,6 @@ import java.util.Map;
 public class UC03_TaoQuiz extends DrawerBaseActivity {
     ActivityUc03TaoQuizBinding binding;
     ArrayList<CauHoi> listCauHoi;
-    ArrayList<CauTraLoi> listCauTraLoi;
     int soCauHoi;
     final int GALLERY_REQ_CODE=1000;
     Uri imgURI;
@@ -125,9 +124,9 @@ public class UC03_TaoQuiz extends DrawerBaseActivity {
         binding.layoutCauHoi.addView(inflater,binding.layoutCauHoi.getChildCount());
     }
     void themCauHoi(){
-        listCauTraLoi= new ArrayList<>();
+
         for (int i=0;i<soCauHoi;i++){
-            listCauTraLoi.clear();
+            ArrayList<CauTraLoi> listCauTraLoi= new ArrayList<>();
             View v = ((ViewGroup) binding.layoutCauHoi).getChildAt(i);
             EditText edt_ndCauHoi= v.findViewById(R.id.editText_nhapCauHoi);
             String noiDungCauHoi = edt_ndCauHoi.getText().toString();
@@ -159,6 +158,7 @@ public class UC03_TaoQuiz extends DrawerBaseActivity {
             listCauTraLoi.add(ctl);
 
             listCauHoi.add(new CauHoi(noiDungCauHoi,listCauTraLoi));
+            Log.d("Dap an cau", listCauTraLoi.get(0).getNoiDung());
         }
 
     }

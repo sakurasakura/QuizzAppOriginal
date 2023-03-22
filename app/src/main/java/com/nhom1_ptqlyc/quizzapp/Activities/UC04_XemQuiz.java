@@ -27,7 +27,7 @@ import java.util.ArrayList;
 
 public class UC04_XemQuiz extends DrawerBaseActivity {
     ActivityUc04XemQuizBinding binding;
-    String QuizID= "DU7BnWlM8okCt7cOYg1D";
+    String QuizID= "XAJQbTeOOfOaPp5ZLC80";
     Quiz quiz;
     String tenQuiz;
     String luotLam;
