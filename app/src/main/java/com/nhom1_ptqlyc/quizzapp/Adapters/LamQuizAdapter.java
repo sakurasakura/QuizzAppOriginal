@@ -22,14 +22,12 @@ public class LamQuizAdapter extends BaseAdapter {
     ArrayList<CauHoi> listCauHoi;
     ArrayList<Integer> listCauTraLoiCuaNgDung;
 
+    RadioButton radioButton1,radioButton2,radioButton3;
+
     public LamQuizAdapter(Context mContext, int row_layout, ArrayList<CauHoi> listCauHoi) {
         this.mContext = mContext;
         this.row_layout = row_layout;
         this.listCauHoi = listCauHoi;
-    }
-
-    public ArrayList<Integer> getListCauTraLoiCuaNgDung() {
-        return listCauTraLoiCuaNgDung;
     }
 
     @Override
@@ -50,57 +48,62 @@ public class LamQuizAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        convertView=inflater.inflate(R.layout.row_hien_thi_cau_hoi,null);
+        convertView = inflater.inflate(R.layout.row_hien_thi_cau_hoi, null);
 
         TextView thuTuCauHoi = convertView.findViewById(R.id.textView_thuTuCauHoi);
         TextView ndCauHoi = convertView.findViewById(R.id.textView_ndCauHoi);
         RadioGroup radioGroup = convertView.findViewById(R.id.radioGroup_cauTraLoi);
-        RadioButton radioButton1= convertView.findViewById(R.id.radioButton_dapAn1);
-        RadioButton radioButton2= convertView.findViewById(R.id.radioButton_dapAn2);
-        RadioButton radioButton3= convertView.findViewById(R.id.radioButton_dapAn3);
+         radioButton1 = convertView.findViewById(R.id.radioButton_dapAn1);
+         radioButton2 = convertView.findViewById(R.id.radioButton_dapAn2);
+         radioButton3 = convertView.findViewById(R.id.radioButton_dapAn3);
 
-        thuTuCauHoi.setText("Câu "+ (position+1)+": ");
+        thuTuCauHoi.setText("Câu " + (position + 1) + ": ");
         ndCauHoi.setText(listCauHoi.get(position).getNoiDung());
         ArrayList<CauTraLoi> listCauTraLoi = new ArrayList<>();
         listCauTraLoi.clear();
-        listCauTraLoi=listCauHoi.get(position).getListCauTraLoi();
+        listCauTraLoi = listCauHoi.get(position).getListCauTraLoi();
         radioButton1.setText(listCauTraLoi.get(0).getNoiDung());
         radioButton2.setText(listCauTraLoi.get(1).getNoiDung());
         radioButton3.setText(listCauTraLoi.get(2).getNoiDung());
 
-//        if (radioButton1.isChecked()){
-//            listCauTraLoiCuaNgDung.add(0);
-//        } else if (radioButton2.isChecked()) {
-//            listCauTraLoiCuaNgDung.add(1);
-//        } else if (radioButton3.isChecked()) {
-//            listCauTraLoiCuaNgDung.add(2);
-//        }
-        listCauTraLoiCuaNgDung=new ArrayList<>();
-        radioButton1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
-                    listCauTraLoiCuaNgDung.add(0);
-                }
-            }
-        });
-        radioButton2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
-                    listCauTraLoiCuaNgDung.add(1);
-                }
-            }
-        });
-        radioButton3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
-                    listCauTraLoiCuaNgDung.add(2);
-                }
-            }
-        });
+
+//        listCauTraLoiCuaNgDung=new ArrayList<>();
+//        radioButton1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                if (isChecked){
+//                    listCauTraLoiCuaNgDung.add(0);
+//                }
+//            }
+//        });
+//        radioButton2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                if (isChecked){
+//                    listCauTraLoiCuaNgDung.add(1);
+//                }
+//            }
+//        });
+//        radioButton3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                if (isChecked){
+//                    listCauTraLoiCuaNgDung.add(2);
+//                }
+//            }
+//        });
 
         return convertView;
+    }
+
+    public int getDapAnNgDung(int position) {
+        if (radioButton1.isChecked()) {
+            return 0;
+        } else if (radioButton2.isChecked()) {
+            return 1;
+        } else if (radioButton3.isChecked()) {
+            return 2;
+        }
+        return -1;
     }
 }

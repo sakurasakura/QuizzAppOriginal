@@ -5,7 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activities.UC05_LamQuiz">
+    <TextView
+        android:layout_marginTop="20dp"
+        android:text="1:00"
+        android:layout_marginHorizontal="20dp"
+        android:textSize="20sp"
+        android:id="@+id/textView_thoiGian"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 <ListView
+    android:layout_below="@id/textView_thoiGian"
     android:layout_marginTop="20dp"
     android:id="@+id/listView_cauHoi"
     android:layout_width="match_parent"
