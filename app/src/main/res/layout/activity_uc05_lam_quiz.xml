@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".Activities.UC05_LamQuiz">
     <TextView
+        android:layout_alignParentTop="true"
         android:layout_marginTop="20dp"
         android:text="1:00"
         android:layout_marginHorizontal="20dp"
@@ -14,18 +15,25 @@
         android:layout_alignParentRight="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
+
+
 <ListView
     android:layout_below="@id/textView_thoiGian"
     android:layout_marginTop="20dp"
     android:id="@+id/listView_cauHoi"
     android:layout_width="match_parent"
+    android:layout_above="@id/button_hoanThanh"
     android:layout_height="wrap_content"/>
     <Button
         android:id="@+id/button_hoanThanh"
-        android:text="Hoàn thành"
-        android:layout_marginVertical="20dp"
-        android:layout_below="@id/listView_cauHoi"
-        android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentBottom="true"
+       android:layout_centerHorizontal="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="Hoàn thành" />
 </RelativeLayout>

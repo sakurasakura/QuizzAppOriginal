@@ -27,7 +27,7 @@ import java.util.ArrayList;
 
 public class UC04_XemQuiz extends DrawerBaseActivity {
     ActivityUc04XemQuizBinding binding;
-    String QuizID= "XAJQbTeOOfOaPp5ZLC80";
+    String QuizID= "snaW7pTlAJlGBVmCMYq6";
     Quiz quiz;
     String tenQuiz;
     String luotLam;
@@ -61,6 +61,7 @@ public class UC04_XemQuiz extends DrawerBaseActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),UC05_LamQuiz.class);
+                intent.putExtra("KEY_QUIZ_ID", QuizID);
                 intent.putExtra("KEY_QUIZ",quiz);
                 if (quiz==null){
                     Log.e("button làm quiz", "quiz null");

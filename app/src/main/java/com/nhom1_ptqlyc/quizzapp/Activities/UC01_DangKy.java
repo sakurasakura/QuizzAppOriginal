@@ -54,8 +54,8 @@ public class UC01_DangKy extends AppCompatActivity {
                     Toast.makeText(UC01_DangKy.this, "Nhập thiếu dữ liệu!", Toast.LENGTH_SHORT).show();
                 }else {
                     Map<String, Object> map = new HashMap<>();
-                    map.put("username", username);
-                    map.put("password", pw);
+                    map.put("username", username.trim());
+                    map.put("password", pw.trim());
                     map.put("isAdmin", false);
                     map.put("birth", birth);
                     map.put("gender", gender);
@@ -63,19 +63,19 @@ public class UC01_DangKy extends AppCompatActivity {
                     map.put("avatar", null);
                     map.put("isActive", true);
 
-                    db.collection("users").add(map).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                        @Override
-                        public void onSuccess(DocumentReference documentReference) {
-                           // Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
-                            Toast.makeText(UC01_DangKy.this, "Success", Toast.LENGTH_SHORT).show();
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                           // Log.w(TAG, "Error adding document", e);
-                            Toast.makeText(UC01_DangKy.this, "Fail", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                    DocumentReference documentReference=db.collection("users").document(username);
+                    documentReference.set(map)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    Toast.makeText(UC01_DangKy.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(UC01_DangKy.this, "Đăng ký thất bại", Toast.LENGTH_SHORT).show();
+                                }
+                            });
                 }
             }
         });
