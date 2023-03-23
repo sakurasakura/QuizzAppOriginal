@@ -23,30 +23,21 @@
         android:layout_below="@id/textview1"
         android:layout_centerHorizontal="true"
         android:layout_marginVertical="5dp"
-        android:text="Điểm số lần này của bạn là: 5.00"
+        android:text="Điểm số lần này của bạn là:"
         android:textColor="@color/third_purple"
         android:textSize="20dp" />
 
     <TextView
-        android:id="@+id/textView_DiemCaoNhat"
+        android:id="@+id/textView_show_DiemCaoNhat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/textView_DiemLanNay"
         android:layout_centerHorizontal="true"
         android:layout_marginVertical="5dp"
-        android:text="Điểm cao nhất: 8.00"
+        android:text="Điểm cao nhất:"
         android:textColor="@color/second_purple"
         android:textSize="20dp" />
 
-    <TextView
-        android:id="@+id/textView_rating"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/textView_DiemCaoNhat"
-        android:layout_marginHorizontal="20dp"
-        android:text="Rating trung bình: 4.00 (20)"
-        android:textColor="@color/second_purple"
-        android:textStyle="italic" />
 
     <TextView
         android:id="@+id/click_xemBinhLuan"
@@ -55,7 +46,7 @@
         android:textSize="20sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textView_rating"
+        android:layout_below="@id/textView_show_DiemCaoNhat"
         android:layout_marginHorizontal="20dp"
         android:text="Xem bình luận"
         android:textColor="@color/second_purple"

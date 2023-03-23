@@ -47,7 +47,7 @@ public class BXHadapter extends BaseAdapter {
         TextView textView_bxh_diemCao= convertView.findViewById(R.id.textview_bxh_diemCao);
 
         textView_bxh_username.setText(listBXH.get(position).getIdNgDung());
-        textView_bxh_username.setText(listBXH.get(position).getIdQuiz());
+        textView_bxh_diemCao.setText(listBXH.get(position).getSoDiemCaoNhat()+"");
 
         return convertView;
     }
