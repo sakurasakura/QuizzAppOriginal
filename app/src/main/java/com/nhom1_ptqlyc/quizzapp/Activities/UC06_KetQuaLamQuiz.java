@@ -3,9 +3,11 @@ package com.nhom1_ptqlyc.quizzapp.Activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -132,7 +134,14 @@ public class UC06_KetQuaLamQuiz extends DrawerBaseActivity {
                         }
                     }
                 });
-
+        binding.clickXemBinhLuan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),UC07_XemBinhLuan.class);
+                intent.putExtra("KEY_QUIZ_ID",QuizID);
+                startActivity(intent);
+            }
+        });
 
     }
 }

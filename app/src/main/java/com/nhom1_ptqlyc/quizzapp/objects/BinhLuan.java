@@ -2,8 +2,10 @@ package com.nhom1_ptqlyc.quizzapp.objects;
 
 public class BinhLuan {
     String IDNguoiTao;
+    String hinhAnhNguoiTao;
     String noiDung;
     boolean isShow;
+
     public BinhLuan() {
     }
 
@@ -11,6 +13,21 @@ public class BinhLuan {
         this.IDNguoiTao = IDNguoiTao;
         this.noiDung = noiDung;
         this.isShow = isShow;
+    }
+
+    public BinhLuan(String IDNguoiTao, String hinhAnhNguoiTao, String noiDung, boolean isShow) {
+        this.IDNguoiTao = IDNguoiTao;
+        this.hinhAnhNguoiTao = hinhAnhNguoiTao;
+        this.noiDung = noiDung;
+        this.isShow = isShow;
+    }
+
+    public String getHinhAnhNguoiTao() {
+        return hinhAnhNguoiTao;
+    }
+
+    public void setHinhAnhNguoiTao(String hinhAnhNguoiTao) {
+        this.hinhAnhNguoiTao = hinhAnhNguoiTao;
     }
 
     public String getIDNguoiTao() {

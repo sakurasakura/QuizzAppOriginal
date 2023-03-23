@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    tools:context=".Activities.UC07_XemBinhLuan">
+
+    <EditText
+        android:id="@+id/editText_themBinhLuan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edittext_background_purplestroke"
+        android:hint="Nhập nội dung bình luận"
+        android:padding="10dp"
+        android:textColorHint="@color/second_purple" />
+
+    <Button
+        android:id="@+id/button_themBinhLuan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editText_themBinhLuan"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:backgroundTint="@color/third_purple"
+        android:text="Thêm bình luận" />
+
+    <ListView
+        android:id="@+id/listView_binhLuan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/button_themBinhLuan"
+        android:padding="20dp" />
+</RelativeLayout>

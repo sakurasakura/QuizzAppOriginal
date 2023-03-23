@@ -70,6 +70,14 @@ public class UC04_XemQuiz extends DrawerBaseActivity {
                 }
             }
         });
+        binding.clickXemBinhLuan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),UC07_XemBinhLuan.class);
+                intent.putExtra("KEY_QUIZ_ID",QuizID);
+                startActivity(intent);
+            }
+        });
     }
     void setQuiz(Quiz quiz){
         nguoiTao= quiz.getNguoiTao();
@@ -89,8 +97,7 @@ public class UC04_XemQuiz extends DrawerBaseActivity {
                         binding.textViewTenQuiz.setText(tenQuiz);
                         binding.textViewUser.setText(nguoiTao);
                         binding.textViewLuotLam.setText(luotLam);
-                        binding.textViewRatingTrungBinh.setText(rating);
-                        binding.textViewTimer.setText(thoiGian);
+                        binding.textViewTimer.setText(thoiGian+" phút");
                         binding.textViewChuDe.setText(chuDe);
                         Picasso.get().load(quiz.getHinhAnhURL()).into(binding.imageViewXemQuizHinhAnh);
                     }
