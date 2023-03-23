@@ -5,9 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 
 import com.nhom1_ptqlyc.quizzapp.Activities.UC02_DangNhap;
 
@@ -27,15 +24,8 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), UC02_DangNhap.class);
             startActivity(intent);
         }else {
-            boolean isAdmin = preferences.getBoolean("isAdmin", false);
-            if (isAdmin) {
-                Intent intent = new Intent(getApplicationContext(), HomeAdmin.class);
+                Intent intent = new Intent(getApplicationContext(), Home.class);
                 startActivity(intent);
-            } else {
-                Intent intent = new Intent(getApplicationContext(), HomeUser.class);
-                startActivity(intent);
-
-            }
         }
     }
 }

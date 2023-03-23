@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="120dp"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="10dp">
+
+        <ImageView
+            android:id="@+id/imgView_anhQuiz"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/default_image" />
+
+        <TextView
+            android:id="@+id/textView_tenQuiz"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:text="Đây là tên quiz dài hơn 2 dòng lận đó ulatr ơi"
+            android:textColor="@color/third_purple"
+            android:textStyle="bold|italic" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/icon_user" />
+
+            <TextView
+                android:id="@+id/textView_user"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:textStyle="italic"
+                android:text="this is user account"
+                android:textColor="@color/second_purple"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:id="@+id/textView_chuDe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:background="@color/third_purple"
+                android:maxLines="1"
+                android:paddingHorizontal="7dp"
+                android:text="lịch sử"
+                android:textColor="@color/white"
+                android:textSize="10sp"
+                android:textStyle="italic" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true">
+
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/icon_doquiz" />
+
+                <TextView
+                    android:id="@+id/textView_luotLam"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="100"
+                    android:textColor="@color/second_purple"
+                    android:textSize="10sp"
+                    android:textStyle="italic" />
+            </LinearLayout>
+
+        </RelativeLayout>
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>
