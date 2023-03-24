@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<TextView
+    android:id="@+id/textView_category"
+    android:text="Quiz hot"
+    android:textColor="@color/white"
+    android:background="@color/third_purple"
+    android:layout_width="wrap_content"
+    android:padding="5dp"
+    android:textAllCaps="true"
+    android:textStyle="bold|italic"
+    android:layout_height="wrap_content"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/row_quiz_collection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

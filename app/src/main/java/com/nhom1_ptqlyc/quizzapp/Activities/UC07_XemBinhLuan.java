@@ -65,6 +65,7 @@ public class UC07_XemBinhLuan extends DrawerBaseActivity {
                 }else {
                     Log.e("Lấy bình luận", "Thất bại");
                 }
+               // return null;
             }
         });
 
