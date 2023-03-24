@@ -1,6 +1,7 @@
 package com.nhom1_ptqlyc.quizzapp.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.nhom1_ptqlyc.quizzapp.Activities.UC04_XemQuiz;
 import com.nhom1_ptqlyc.quizzapp.R;
 import com.nhom1_ptqlyc.quizzapp.objects.Quiz;
 import com.nhom1_ptqlyc.quizzapp.objects.QuizWithID;
@@ -35,12 +37,15 @@ public class QuizCardAdapter extends RecyclerView.Adapter<QuizCardAdapter.QuizCa
             textView_tenNgDung = itemView.findViewById(R.id.textView_user);
             textView_chuDe = itemView.findViewById(R.id.textView_chuDe);
             textView_luotlam = itemView.findViewById(R.id.textView_luotLam);
+
+
         }
     }
 
     List<QuizWithID> mList;
-
-    void setData(List<QuizWithID> list) {
+    Context mContext;
+    void setData(List<QuizWithID> list, Context mContext) {
+        this.mContext=mContext;
         this.mList = list;
         notifyDataSetChanged();
     }
@@ -50,6 +55,7 @@ public class QuizCardAdapter extends RecyclerView.Adapter<QuizCardAdapter.QuizCa
     public QuizCardHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_quiz, parent, false);
+
         return new QuizCardHolder(view);
     }
 
@@ -64,6 +70,14 @@ public class QuizCardAdapter extends RecyclerView.Adapter<QuizCardAdapter.QuizCa
         holder.textView_tenNgDung.setText(quiz.getQuiz().getNguoiTao());
         holder.textView_chuDe.setText(quiz.getQuiz().getChuDe());
         holder.textView_luotlam.setText(quiz.getQuiz().getLuotLam()+"");
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(mContext,UC04_XemQuiz.class);
+                intent.putExtra("KEY_QUIZ_WITH_ID",quiz.getQuizID());
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     @Override

@@ -1,6 +1,8 @@
 package com.nhom1_ptqlyc.quizzapp.objects;
 
-public class QuizWithID {
+import java.io.Serializable;
+
+public class QuizWithID implements Serializable {
     String QuizID;
     Quiz quiz;
 

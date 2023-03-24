@@ -1,6 +1,7 @@
 package com.nhom1_ptqlyc.quizzapp.Activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -21,13 +22,16 @@ import com.nhom1_ptqlyc.quizzapp.DrawerBaseActivity;
 import com.nhom1_ptqlyc.quizzapp.databinding.ActivityUc04XemQuizBinding;
 import com.nhom1_ptqlyc.quizzapp.objects.BinhLuan;
 import com.nhom1_ptqlyc.quizzapp.objects.Quiz;
+import com.nhom1_ptqlyc.quizzapp.objects.QuizWithID;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 public class UC04_XemQuiz extends DrawerBaseActivity {
     ActivityUc04XemQuizBinding binding;
-    String QuizID= "snaW7pTlAJlGBVmCMYq6";
+    String QuizID;
+
+    QuizWithID quizWithID;
     Quiz quiz;
     String tenQuiz;
     String luotLam;
@@ -35,37 +39,42 @@ public class UC04_XemQuiz extends DrawerBaseActivity {
     String thoiGian;
     String chuDe;
     String nguoiTao;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding=ActivityUc04XemQuizBinding.inflate(getLayoutInflater());
+        binding = ActivityUc04XemQuizBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         allocateActivityName("LÀM QUIZ");
-        quiz= new Quiz();
-
-        FirebaseFirestore db=FirebaseFirestore.getInstance();
-        Task<DocumentSnapshot> document= db.collection("Quiz").document(QuizID).get()
+//        quizWithID = new QuizWithID();
+//        quizWithID = (QuizWithID) getIntent().getSerializableExtra("KEY_QUIZ_WITH_ID", QuizWithID.class);
+        QuizID = getIntent().getStringExtra("KEY_QUIZ_WITH_ID");
+//        Log.d("id", id);
+//        return;
+       // quiz = quizWithID.getQuiz();
+       // QuizID = quizWithID.getQuizID();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        Task<DocumentSnapshot> document = db.collection("Quiz").document(QuizID).get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        DocumentSnapshot documentSnapshot=task.getResult();
-                        quiz=documentSnapshot.toObject(Quiz.class);
+                        DocumentSnapshot documentSnapshot = task.getResult();
+                        quiz = documentSnapshot.toObject(Quiz.class);
                         Log.e("Lỗi lấy quiz", quiz.getNguoiTao());
                         setQuiz(quiz);
                     }
                 });
 
 
-
         binding.buttonLamQuiz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),UC05_LamQuiz.class);
+                Intent intent = new Intent(getApplicationContext(), UC05_LamQuiz.class);
                 intent.putExtra("KEY_QUIZ_ID", QuizID);
-                intent.putExtra("KEY_QUIZ",quiz);
-                if (quiz==null){
+                intent.putExtra("KEY_QUIZ", quiz);
+                if (quiz == null) {
                     Log.e("button làm quiz", "quiz null");
-                }else {
+                } else {
                     startActivity(intent);
                 }
             }
@@ -73,38 +82,36 @@ public class UC04_XemQuiz extends DrawerBaseActivity {
         binding.clickXemBinhLuan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),UC07_XemBinhLuan.class);
-                intent.putExtra("KEY_QUIZ_ID",QuizID);
+                Intent intent = new Intent(getApplicationContext(), UC07_XemBinhLuan.class);
+                intent.putExtra("KEY_QUIZ_ID", QuizID);
                 startActivity(intent);
             }
         });
     }
-    void setQuiz(Quiz quiz){
-        nguoiTao= quiz.getNguoiTao();
-        Log.d("Id ng tao:", nguoiTao+"");
-        FirebaseFirestore db =FirebaseFirestore.getInstance();
-        Task<DocumentSnapshot> document2= db.collection("users").document(nguoiTao).get()
+
+    void setQuiz(Quiz quiz) {
+        nguoiTao = quiz.getNguoiTao();
+        Log.d("Id ng tao:", nguoiTao + "");
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        Task<DocumentSnapshot> document2 = db.collection("users").document(nguoiTao).get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        DocumentSnapshot documentSnapshot=task.getResult();
-                        nguoiTao=documentSnapshot.get("username",String.class);
-                        tenQuiz=quiz.getTen();
-                        luotLam=String.valueOf(quiz.getLuotLam());
-                        rating=String.valueOf(quiz.getRating());
-                        thoiGian=String.valueOf(quiz.getGioiHanThoiGian());
-                        chuDe=quiz.getChuDe();
+                        DocumentSnapshot documentSnapshot = task.getResult();
+                        nguoiTao = documentSnapshot.get("username", String.class);
+                        tenQuiz = quiz.getTen();
+                        luotLam = String.valueOf(quiz.getLuotLam());
+                        rating = String.valueOf(quiz.getRating());
+                        thoiGian = String.valueOf(quiz.getGioiHanThoiGian());
+                        chuDe = quiz.getChuDe();
                         binding.textViewTenQuiz.setText(tenQuiz);
                         binding.textViewUser.setText(nguoiTao);
                         binding.textViewLuotLam.setText(luotLam);
-                        binding.textViewTimer.setText(thoiGian+" phút");
+                        binding.textViewTimer.setText(thoiGian + " phút");
                         binding.textViewChuDe.setText(chuDe);
                         Picasso.get().load(quiz.getHinhAnhURL()).into(binding.imageViewXemQuizHinhAnh);
                     }
                 });
-
-
-
 
 
     }

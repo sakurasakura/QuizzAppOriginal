@@ -36,14 +36,15 @@ ActivityHomeBinding binding;
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         allocateActivityName("TRANG CHỦ");
+        ArrayList<QuizCategory_Home> list = new ArrayList<>();
 
-        QuizCategoryAdapter adapter = new QuizCategoryAdapter(this.getApplicationContext());
+        QuizCategoryAdapter adapter = new QuizCategoryAdapter(this);
 
         LinearLayoutManager manager = new LinearLayoutManager(this.getApplicationContext(), LinearLayoutManager.VERTICAL,false);
         binding.layoutQuizCategoryCollection.setLayoutManager(manager);
         binding.layoutQuizCategoryCollection.setAdapter(adapter);
 
-        ArrayList<QuizCategory_Home> list = new ArrayList<>();
+
         FirebaseFirestore db=FirebaseFirestore.getInstance();
         ArrayList<QuizWithID> listQuizHot= new ArrayList<>();
 

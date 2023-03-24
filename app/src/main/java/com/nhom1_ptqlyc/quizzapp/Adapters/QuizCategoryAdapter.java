@@ -21,6 +21,11 @@ public class QuizCategoryAdapter extends RecyclerView.Adapter<QuizCategoryAdapte
     Context mContext;
     ArrayList<QuizCategory_Home> listCategory;
 
+    public QuizCategoryAdapter(Context mContext, ArrayList<QuizCategory_Home> listCategory) {
+        this.mContext = mContext;
+        this.listCategory = listCategory;
+    }
+
     public QuizCategoryAdapter(Context mContext) {
         this.mContext = mContext;
     }
@@ -40,15 +45,17 @@ public class QuizCategoryAdapter extends RecyclerView.Adapter<QuizCategoryAdapte
     @Override
     public void onBindViewHolder(@NonNull QuizCategoryViewHolder holder, int position) {
         QuizCategory_Home category = listCategory.get(position);
-        if (category != null) {
+        if (category == null) {
             return;
         }
         holder.textView_category.setText(category.getCategory());
         LinearLayoutManager manager = new LinearLayoutManager(mContext,LinearLayoutManager.HORIZONTAL,false);
         holder.recyclerView_quiz_collection.setLayoutManager(manager);
         QuizCardAdapter quizCardAdapter = new QuizCardAdapter();
-        quizCardAdapter.setData(category.getQuizWithIDS());
+        quizCardAdapter.setData(category.getQuizWithIDS(),mContext);
         holder.recyclerView_quiz_collection.setAdapter(quizCardAdapter);
+
+
     }
 
     @Override
