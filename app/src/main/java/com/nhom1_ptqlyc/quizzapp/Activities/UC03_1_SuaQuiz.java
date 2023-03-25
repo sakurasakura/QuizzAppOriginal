@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -37,6 +38,7 @@ import com.nhom1_ptqlyc.quizzapp.R;
 import com.nhom1_ptqlyc.quizzapp.databinding.ActivityUc031SuaQuizBinding;
 import com.nhom1_ptqlyc.quizzapp.objects.CauHoi;
 import com.nhom1_ptqlyc.quizzapp.objects.CauTraLoi;
+import com.nhom1_ptqlyc.quizzapp.objects.LoadingDialog;
 import com.nhom1_ptqlyc.quizzapp.objects.Quiz;
 import com.squareup.picasso.Picasso;
 
@@ -47,6 +49,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class UC03_1_SuaQuiz extends DrawerBaseActivity {
+    LoadingDialog dialog;
     ActivityUc031SuaQuizBinding binding;
     Quiz quiz;
     String tenQuiz;
@@ -76,7 +79,7 @@ public class UC03_1_SuaQuiz extends DrawerBaseActivity {
         binding = ActivityUc031SuaQuizBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         allocateActivityName("SỬA QUIZ");
-
+dialog= new LoadingDialog(this);
         quiz = (Quiz) getIntent().getSerializableExtra("KEY_QUIZ");
         quizID = getIntent().getStringExtra("KEY_QUIZ_ID");
         Log.d("Kiểm tra quiz nhận", quiz.getTen());
@@ -154,7 +157,7 @@ listCauHoi=quiz.getListCauHoi();
         binding.buttonHoanThanh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //dialog.startLoading();
+                dialog.startLoading();
                 listCauHoi.clear();
                 themCauHoi();
                 updateQuizToDB();
@@ -250,12 +253,21 @@ listCauHoi=quiz.getListCauHoi();
                     hinhAnhURL = uri.toString();
                     Log.d("complete uri",hinhAnhURL);
                     reference.update("chuDe",chuDe,"gioiHanThoiGian",gioiHanThoiGian,"hinhAnhURL",hinhAnhURL,"listCauHoi",listCauHoi,"soLuongCauHoi",soCauHoi,"ten", tenQuiz);
+                    dialog.dismissDialog();
+                    Intent intent= new Intent(getApplicationContext(),UC04_XemQuiz.class);
+                    intent.putExtra("KEY_QUIZ_WITH_ID",quizID);
+                   startActivity(intent);
                 }
             });
 
         }else {
             Log.d("úpdate quiz", listCauHoi.get(1).getListCauTraLoi().get(2).getNoiDung().toString());
             reference.update("chuDe",chuDe,"gioiHanThoiGian",gioiHanThoiGian,"listCauHoi",listCauHoi,"soLuongCauHoi",soCauHoi,"ten", tenQuiz);
+            dialog.dismissDialog();
+            Toast.makeText(UC03_1_SuaQuiz.this, "Update thành công", Toast.LENGTH_SHORT).show();
+            Intent intent= new Intent(getApplicationContext(),UC04_XemQuiz.class);
+            intent.putExtra("KEY_QUIZ_WITH_ID",quizID);
+           startActivity(intent);
         }
 
     }

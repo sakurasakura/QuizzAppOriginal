@@ -32,7 +32,7 @@ import java.util.Comparator;
 
 public class Home extends DrawerBaseActivity {
     ActivityHomeBinding binding;
-    ArrayList<QuizWithID> listQuizToan,listQuizTiengAnh,listQuizDoVui;
+    ArrayList<QuizWithID> listQuizToan, listQuizTiengAnh, listQuizDoVui;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,8 +72,10 @@ public class Home extends DrawerBaseActivity {
                 }
             }
         });
-
-        ArrayList<QuizWithID>listQuiz30= new ArrayList<>();
+        listQuizToan = new ArrayList<>();
+        listQuizTiengAnh = new ArrayList<>();
+        listQuizDoVui = new ArrayList<>();
+        //lay quiz Toan
 
         ArrayList<QuizCategory_Home> list2 = new ArrayList<>();
 
@@ -82,33 +84,79 @@ public class Home extends DrawerBaseActivity {
         LinearLayoutManager manager2 = new LinearLayoutManager(this.getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         binding.layoutQuizCategoryCollection2.setLayoutManager(manager2);
         binding.layoutQuizCategoryCollection2.setAdapter(adapter2);
-        listQuizToan = new ArrayList<>();
-        listQuizTiengAnh = new ArrayList<>();
-        listQuizDoVui = new ArrayList<>();
 
-        //lay 30Quiz
-        db.collection("Quiz").whereEqualTo("chuDe", "Toán").
-        limit(30).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            Log.d("Lấy 30 quiz", "Thành công");
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                listQuizToan.add(new QuizWithID(document.getId(), document.toObject(Quiz.class)));
-                            }
-                            //listQuizToan=layQuizTheoChuDe("Toán",listQuiz30);
-                            listQuizTiengAnh=layQuizTheoChuDe("Tiếng Anh",listQuiz30);
-                            listQuizDoVui=layQuizTheoChuDe("Đố vui",listQuiz30);
-                            list2.add(new QuizCategory_Home("Chủ đề Toán học",listQuizToan));
-                            //list2.add(new QuizCategory_Home("Chủ đề Tiếng ANh",listQuizTiengAnh));
-                            //list2.add(new QuizCategory_Home("Chủ đề Đố vui",listQuizDoVui));
-                            adapter2.setData(list2);
-                            Log.d("Lấy 30 quiz", listQuizToan.get(0).getQuizID());
-                        } else {
-                            Log.d("Lấy all quiz", "Thất bại");
-                        }
+
+        //lay quiz Toan
+        db.collection("Quiz").whereEqualTo("chuDe", "Toán").limit(10).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    Log.d("Lấy 10 quiz Toán", "Thành công");
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        listQuizToan.add(new QuizWithID(document.getId(), document.toObject(Quiz.class)));
                     }
-                });
+                    list2.add(new QuizCategory_Home("Quiz toán", listQuizToan));
+                    adapter2.setData(list2);
+                    Log.d("Lấy 10 quiz Toán", listQuizToan.get(0).getQuizID());
+                } else {
+                    Log.d("Lấy 10 quiz Toán", "Thất bại");
+                }
+            }
+        });
+        //lay quiz TiengAnh
+
+        ArrayList<QuizCategory_Home> list3 = new ArrayList<>();
+
+        QuizCategoryAdapter adapter3 = new QuizCategoryAdapter(this);
+
+        LinearLayoutManager manager3 = new LinearLayoutManager(this.getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        binding.layoutQuizCategoryCollection3.setLayoutManager(manager3);
+        binding.layoutQuizCategoryCollection3.setAdapter(adapter3);
+
+
+        db.collection("Quiz").whereEqualTo("chuDe", "Tiếng Anh").limit(10).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    Log.d("Lấy 10 quiz Tiếng Anh", "Thành công");
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        listQuizTiengAnh.add(new QuizWithID(document.getId(), document.toObject(Quiz.class)));
+                    }
+                    list3.add(new QuizCategory_Home("Quiz tiếng anh", listQuizTiengAnh));
+                    adapter3.setData(list3);
+                    Log.d("Lấy 10 quiz Tiếng Anh", listQuizTiengAnh.get(0).getQuizID());
+                } else {
+                    Log.d("Lấy 10 quiz Tiếng Anh", "Thất bại");
+                }
+            }
+        });
+        ArrayList<QuizCategory_Home> list4 = new ArrayList<>();
+
+        QuizCategoryAdapter adapter4 = new QuizCategoryAdapter(this);
+
+        LinearLayoutManager manager4 = new LinearLayoutManager(this.getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        binding.layoutQuizCategoryCollection4.setLayoutManager(manager4);
+        binding.layoutQuizCategoryCollection4.setAdapter(adapter4);
+
+
+        //lay quiz Đố vui
+        db.collection("Quiz").whereEqualTo("chuDe", "Đố vui").limit(10).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    Log.d("Lấy 10 quiz Đố vui", "Thành công");
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        listQuizDoVui.add(new QuizWithID(document.getId(), document.toObject(Quiz.class)));
+                    }
+                    list4.add(new QuizCategory_Home("Quiz đố vui", listQuizHot));
+                    adapter3.setData(list3);
+                    Log.d("Lấy 10 quiz Đố vui", listQuizDoVui.get(0).getQuizID());
+                } else {
+                    Log.d("Lấy 10 quiz Đố vui", "Thất bại");
+                }
+            }
+        });
+
 
 
     }
