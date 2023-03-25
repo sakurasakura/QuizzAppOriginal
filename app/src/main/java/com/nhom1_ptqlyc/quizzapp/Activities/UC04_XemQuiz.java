@@ -1,11 +1,14 @@
 package com.nhom1_ptqlyc.quizzapp.Activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,6 +22,7 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.nhom1_ptqlyc.quizzapp.DrawerBaseActivity;
+import com.nhom1_ptqlyc.quizzapp.Home;
 import com.nhom1_ptqlyc.quizzapp.databinding.ActivityUc04XemQuizBinding;
 import com.nhom1_ptqlyc.quizzapp.objects.BinhLuan;
 import com.nhom1_ptqlyc.quizzapp.objects.Quiz;
@@ -101,6 +105,27 @@ public class UC04_XemQuiz extends DrawerBaseActivity {
                 } else {
                     startActivity(intent);
                 }
+            }
+        });
+        binding.btnXoaQuiz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(UC04_XemQuiz.this).setTitle("Xác nhận xóa").setMessage("Bạn có chắc chắn muốn xóa không?\nQuiz đã xóa không thể lấy lại.")
+                        .setPositiveButton("Xóa", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                db.collection("Quiz").document(QuizID).delete();
+                                dialog.dismiss();
+                                Toast.makeText(getApplicationContext(), "Đã xóa quiz", Toast.LENGTH_SHORT).show();
+                                Intent intent= new Intent(getApplicationContext(), Home.class);
+                                startActivity(intent);
+                            }
+                        }).setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        }).show();
             }
         });
     }
