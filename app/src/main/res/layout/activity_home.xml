@@ -1,81 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context=".Home">
-    <LinearLayout
-        android:orientation="vertical"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <RelativeLayout
-
-            android:layout_marginHorizontal="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <ImageView
-                android:id="@+id/icon1"
-                android:src="@drawable/app_ballon_icon"
-                android:layout_width="80dp"
-                android:layout_height="80dp"/>
-            <ImageView
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@id/icon1"
-                android:src="@drawable/uc01_app_slogan"
-                android:layout_width="80dp"
-                android:layout_height="80dp"/>
-            <LinearLayout
-                android:layout_centerVertical="true"
-                android:orientation="vertical"
-                android:layout_alignParentRight="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:layout_gravity="center_horizontal"
-                    android:src="@drawable/icon_tim_kiem"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"/>
-                <TextView
-                    android:layout_marginVertical="5dp"
-                    android:textAllCaps="true"
-                    android:text="Tìm kiếm"
-                    android:textColor="@color/second_purple"
-                    android:textStyle="italic|bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
-        </RelativeLayout>
-        <Button
-            android:layout_marginVertical="10dp"
-            android:text="+ Tạo quiz mới"
-            android:backgroundTint="@color/third_purple"
-            android:layout_gravity="center_horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/layout_quiz_category_collection"
+            android:layout_height="match_parent">
+            <RelativeLayout
+
+                android:layout_marginHorizontal="20dp"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/icon1"
+                    android:src="@drawable/app_ballon_icon"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"/>
+                <ImageView
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/icon1"
+                    android:src="@drawable/uc01_app_slogan"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"/>
+                <LinearLayout
+                    android:layout_centerVertical="true"
+                    android:orientation="vertical"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/icon_tim_kiem"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"/>
+                    <TextView
+                        android:layout_marginVertical="5dp"
+                        android:textAllCaps="true"
+                        android:text="Tìm kiếm"
+                        android:textColor="@color/second_purple"
+                        android:textStyle="italic|bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+            </RelativeLayout>
+            <Button
+                android:layout_marginVertical="10dp"
+                android:text="+ Tạo quiz mới"
+                android:backgroundTint="@color/third_purple"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/layout_quiz_category_collection2"
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/layout_quiz_category_collection3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/layout_quiz_category_collection4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/layout_quiz_category_collection"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/layout_quiz_category_collection2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/layout_quiz_category_collection3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/layout_quiz_category_collection4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
         </LinearLayout>
+    </ScrollView>
 
-    </LinearLayout>
 
-</ScrollView>
+</LinearLayout>
