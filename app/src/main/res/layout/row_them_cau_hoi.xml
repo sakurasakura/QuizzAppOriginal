@@ -54,12 +54,14 @@
             android:orientation="horizontal">
 
             <RadioButton
+                android:id="@+id/rd1_dung"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/second_purple"
                 android:text="Đúng" />
 
             <RadioButton
+                android:id="@+id/rd1_sai"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/second_purple"
@@ -95,12 +97,14 @@
             android:orientation="horizontal">
 
             <RadioButton
+                android:id="@+id/rd2_dung"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/second_purple"
                 android:text="Đúng" />
 
             <RadioButton
+                android:id="@+id/rd2_sai"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/second_purple"
@@ -136,12 +140,14 @@
             android:orientation="horizontal">
 
             <RadioButton
+                android:id="@+id/rd3_dung"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/second_purple"
                 android:text="Đúng" />
 
             <RadioButton
+                android:id="@+id/rd3_sai"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/second_purple"

@@ -146,4 +146,28 @@
         android:layout_width="wrap_content"
         android:text="LÀM QUIZ"
         android:layout_height="wrap_content"/>
+    <LinearLayout
+        android:id="@+id/layoutCuaNguoiTao"
+        android:visibility="invisible"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/button_lamQuiz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <Button
+            android:layout_marginHorizontal="10dp"
+            android:text="Sửa Quiz"
+            android:id="@+id/btn_suaQuiz"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/third_purple"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:layout_marginHorizontal="10dp"
+            android:text="Xóa Quiz"
+            android:id="@+id/btn_xoaQuiz"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/third_purple"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
 </RelativeLayout>

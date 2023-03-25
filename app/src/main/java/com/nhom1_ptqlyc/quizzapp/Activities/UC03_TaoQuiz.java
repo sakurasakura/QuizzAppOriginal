@@ -23,6 +23,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -49,6 +50,7 @@ import com.nhom1_ptqlyc.quizzapp.databinding.ActivityUc03TaoQuizBinding;
 import com.nhom1_ptqlyc.quizzapp.objects.BinhLuan;
 import com.nhom1_ptqlyc.quizzapp.objects.CauHoi;
 import com.nhom1_ptqlyc.quizzapp.objects.CauTraLoi;
+import com.nhom1_ptqlyc.quizzapp.objects.LoadingDialog;
 import com.nhom1_ptqlyc.quizzapp.objects.Quiz;
 
 import java.io.IOException;
@@ -80,10 +82,12 @@ public class UC03_TaoQuiz extends DrawerBaseActivity {
                     }
                 }
             });
+    LoadingDialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding= ActivityUc03TaoQuizBinding.inflate(getLayoutInflater());
+        dialog=new LoadingDialog(UC03_TaoQuiz.this);
         setContentView(binding.getRoot());
         allocateActivityName("TẠO QUIZ");
 
@@ -111,17 +115,17 @@ public class UC03_TaoQuiz extends DrawerBaseActivity {
         binding.buttonHoanThanh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                dialog.startLoading();
                 themCauHoi();
                 themQuiz();
             }
         });
-
     }
     void themView_themCauHoi(){
         soCauHoi=soCauHoi+1;
         View inflater = LayoutInflater.from(this).inflate(R.layout.row_them_cau_hoi,null);
         binding.layoutCauHoi.addView(inflater,binding.layoutCauHoi.getChildCount());
+
     }
     void themCauHoi(){
 
@@ -238,6 +242,7 @@ public class UC03_TaoQuiz extends DrawerBaseActivity {
                 Map<String,Object> map=new HashMap<>();
                 map.put("listBinhLuan",new ArrayList<BinhLuan>());
                 db.collection("Comment").document(quizID).set(map);
+                dialog.dismissDialog();
             }
         });
 

@@ -39,20 +39,23 @@ public class UC04_XemQuiz extends DrawerBaseActivity {
     String thoiGian;
     String chuDe;
     String nguoiTao;
-
+ String thisUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityUc04XemQuizBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         allocateActivityName("LÀM QUIZ");
+
+        SharedPreferences preferences= getSharedPreferences("user_data",MODE_PRIVATE);
+        thisUser= preferences.getString("username","");
 //        quizWithID = new QuizWithID();
 //        quizWithID = (QuizWithID) getIntent().getSerializableExtra("KEY_QUIZ_WITH_ID", QuizWithID.class);
         QuizID = getIntent().getStringExtra("KEY_QUIZ_WITH_ID");
 //        Log.d("id", id);
 //        return;
-       // quiz = quizWithID.getQuiz();
-       // QuizID = quizWithID.getQuizID();
+  //     quiz = quizWithID.getQuiz();
+     //   QuizID = quizWithID.getQuizID();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         Task<DocumentSnapshot> document = db.collection("Quiz").document(QuizID).get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -87,7 +90,21 @@ public class UC04_XemQuiz extends DrawerBaseActivity {
                 startActivity(intent);
             }
         });
+        binding.btnSuaQuiz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), UC03_1_SuaQuiz.class);
+                intent.putExtra("KEY_QUIZ_ID", QuizID);
+                intent.putExtra("KEY_QUIZ", quiz);
+                if (quiz == null) {
+                    Log.e("button làm quiz", "quiz null");
+                } else {
+                    startActivity(intent);
+                }
+            }
+        });
     }
+
 
     void setQuiz(Quiz quiz) {
         nguoiTao = quiz.getNguoiTao();
@@ -106,6 +123,9 @@ public class UC04_XemQuiz extends DrawerBaseActivity {
                         chuDe = quiz.getChuDe();
                         binding.textViewTenQuiz.setText(tenQuiz);
                         binding.textViewUser.setText(nguoiTao);
+                        if (nguoiTao.equals(thisUser)){
+                            binding.layoutCuaNguoiTao.setVisibility(View.VISIBLE);
+                        }
                         binding.textViewLuotLam.setText(luotLam);
                         binding.textViewTimer.setText(thoiGian + " phút");
                         binding.textViewChuDe.setText(chuDe);
