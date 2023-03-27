@@ -46,54 +46,54 @@ public class UC07_XemBinhLuan extends DrawerBaseActivity {
     String QuizID;
     String userID;
     String avatar;
-LoadingDialog dialog= new LoadingDialog(this);
+    LoadingDialog dialog = new LoadingDialog(this);
     BinhLuanAdapter adapter;
     ListBinhLuan listBinhLuan;
     FirebaseFirestore db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityUc07XemBinhLuanBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         allocateActivityName("BÌNH LUẬN");
-dialog.startLoading();
+        dialog.startLoading();
         getIntent();
         QuizID = getIntent().getStringExtra("KEY_QUIZ_ID");
         SharedPreferences preferences = getSharedPreferences("user_data", MODE_PRIVATE);
         userID = preferences.getString("id", "");
-        avatar = preferences.getString("avatar","");
-        listBinhLuan=new ListBinhLuan(new ArrayList<>());
-        db=FirebaseFirestore.getInstance();
+        avatar = preferences.getString("avatar", "");
+        listBinhLuan = new ListBinhLuan(new ArrayList<>());
+        db = FirebaseFirestore.getInstance();
 
-        DocumentReference reference=db.collection("Comment").document(QuizID);
+        DocumentReference reference = db.collection("Comment").document(QuizID);
         reference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()){
-                    listBinhLuan=task.getResult().toObject(ListBinhLuan.class);
-                    if (!listBinhLuan.getListBinhLuan().isEmpty()){
-                        Log.d("ktra listBinhLuan", listBinhLuan.getListBinhLuan().get(0).isShow()+"");
+                if (task.isSuccessful()) {
+                    listBinhLuan = task.getResult().toObject(ListBinhLuan.class);
+                    if (!listBinhLuan.getListBinhLuan().isEmpty()) {
+                        Log.d("ktra listBinhLuan", listBinhLuan.getListBinhLuan().get(0).isShow() + "");
                     }
                     binding.listViewBinhLuan.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
                         @Override
                         public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                            if (userID.equals(listBinhLuan.getListBinhLuan().get(position).getIDNguoiTao())){
+                            if (userID.equals(listBinhLuan.getListBinhLuan().get(position).getIDNguoiTao())) {
                                 openDialog_suaBL(position);
                                 return true;
-                            }
-                            else {
+                            } else {
                                 return false;
                             }
 
                         }
                     });
 
-                }else {
+                } else {
                     Log.e("Lấy bình luận", "Thất bại");
                 }
-                adapter= new BinhLuanAdapter(getApplicationContext(),listBinhLuan);
+                adapter = new BinhLuanAdapter(getApplicationContext(), listBinhLuan);
                 binding.listViewBinhLuan.setAdapter(adapter);
-               // return null;
+                // return null;
                 dialog.dismissDialog();
             }
         });
@@ -103,10 +103,10 @@ dialog.startLoading();
             public void onClick(View v) {
                 dialog.startLoading();
                 String noidung = binding.editTextThemBinhLuan.getText().toString();
-                if (noidung.isEmpty()){
+                if (noidung.isEmpty()) {
                     Toast.makeText(UC07_XemBinhLuan.this, "Nội dung nhập trống", Toast.LENGTH_SHORT).show();
-                }else {
-                    BinhLuan binhLuan = new BinhLuan(userID,avatar,noidung,true);
+                } else {
+                    BinhLuan binhLuan = new BinhLuan(userID, avatar, noidung, true);
                     listBinhLuan.getListBinhLuan().add(binhLuan);
                     adapter.notifyDataSetChanged();
                     pushCommentToDB(binhLuan);
@@ -117,8 +117,9 @@ dialog.startLoading();
             }
         });
     }
-    void pushCommentToDB(BinhLuan binhLuan){
-        DocumentReference reference=db.collection("Comment").document(QuizID);
+
+    void pushCommentToDB(BinhLuan binhLuan) {
+        DocumentReference reference = db.collection("Comment").document(QuizID);
         reference.update("listBinhLuan", FieldValue.arrayUnion(binhLuan))
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -129,11 +130,12 @@ dialog.startLoading();
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.d("Thêm bình luận","Thất bại");
+                        Log.d("Thêm bình luận", "Thất bại");
                         dialog.dismissDialog();
                     }
                 });
     }
+
     void openDialog_suaBL(int position) {
         final Dialog dialog2 = new Dialog(this);
         dialog2.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -161,26 +163,26 @@ dialog.startLoading();
                     return;
                 } else {
                     dialog.startLoading();
-                    listBinhLuan.getListBinhLuan().add(new BinhLuan(userID,avatar,binhluan,true));
+                    listBinhLuan.getListBinhLuan().add(new BinhLuan(userID, avatar, binhluan, true));
                     listBinhLuan.getListBinhLuan().remove(position);
-                    DocumentReference documentReference= db.collection("Comment").document(QuizID);
-                    documentReference.update("listBinhLuan",listBinhLuan.getListBinhLuan() )
+                    DocumentReference documentReference = db.collection("Comment").document(QuizID);
+                    documentReference.update("listBinhLuan", listBinhLuan.getListBinhLuan())
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void unused) {
-                            Toast.makeText(UC07_XemBinhLuan.this, "Sửa bình luận thành công!", Toast.LENGTH_SHORT).show();
-                           listBinhLuan.getListBinhLuan().get(position).setNoiDung(binhluan);
-                           adapter.notifyDataSetChanged();
-                            dialog.dismissDialog();
-                            dialog2.dismiss();
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            dialog.dismissDialog();
-                            Toast.makeText(UC07_XemBinhLuan.this, "Thay đổi bình luận thất bại!", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    Toast.makeText(UC07_XemBinhLuan.this, "Sửa bình luận thành công!", Toast.LENGTH_SHORT).show();
+                                    listBinhLuan.getListBinhLuan().get(position).setNoiDung(binhluan);
+                                    adapter.notifyDataSetChanged();
+                                    dialog.dismissDialog();
+                                    dialog2.dismiss();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    dialog.dismissDialog();
+                                    Toast.makeText(UC07_XemBinhLuan.this, "Thay đổi bình luận thất bại!", Toast.LENGTH_SHORT).show();
+                                }
+                            });
                 }
             }
         });
@@ -188,17 +190,17 @@ dialog.startLoading();
             @Override
             public void onClick(View v) {
                 dialog.startLoading();
-                DocumentReference documentReference= db.collection("Comment").document(QuizID);
+                DocumentReference documentReference = db.collection("Comment").document(QuizID);
                 listBinhLuan.getListBinhLuan().remove(position);
                 documentReference.update("listBinhLuan", listBinhLuan.getListBinhLuan())
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()){
+                                if (task.isSuccessful()) {
                                     Toast.makeText(UC07_XemBinhLuan.this, "Xóa bình luận thành công", Toast.LENGTH_SHORT).show();
 
                                     adapter.notifyDataSetChanged();
-                                }else {
+                                } else {
                                     Toast.makeText(UC07_XemBinhLuan.this, "Xóa thất bại", Toast.LENGTH_SHORT).show();
                                 }
                                 dialog.dismissDialog();
@@ -208,4 +210,5 @@ dialog.startLoading();
             }
         });
         dialog2.show();
-}}
+    }
+}

@@ -53,10 +53,11 @@ public class UC05_LamQuiz extends DrawerBaseActivity {
 
         listCauHoi = new ArrayList<>();
         listCauHoi = quiz.getListCauHoi();
-
+        binding.textViewThoiGian.setVisibility(View.GONE);
         adapter = new LamQuizAdapter(getApplicationContext(), R.layout.row_hien_thi_cau_hoi, listCauHoi);
         binding.listViewCauHoi.setAdapter(adapter);
         if (quiz.getGioiHanThoiGian() != 0) {
+            binding.textViewThoiGian.setVisibility(View.VISIBLE);
             cdt = new CountDownTimer(quiz.getGioiHanThoiGian() * 60 * 1000, 1000) {
                 @Override
                 public void onTick(long millisUntilFinished) {

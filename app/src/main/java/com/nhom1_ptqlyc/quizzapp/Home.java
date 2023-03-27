@@ -6,8 +6,10 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -19,9 +21,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.nhom1_ptqlyc.quizzapp.Activities.UC09_TimKiem;
 import com.nhom1_ptqlyc.quizzapp.Adapters.QuizCategoryAdapter;
 import com.nhom1_ptqlyc.quizzapp.databinding.ActivityHomeBinding;
 import com.nhom1_ptqlyc.quizzapp.databinding.ActivityUc07XemBinhLuanBinding;
+import com.nhom1_ptqlyc.quizzapp.objects.LoadingDialog;
 import com.nhom1_ptqlyc.quizzapp.objects.Quiz;
 import com.nhom1_ptqlyc.quizzapp.objects.QuizCategory_Home;
 import com.nhom1_ptqlyc.quizzapp.objects.QuizWithID;
@@ -34,6 +38,7 @@ import java.util.Comparator;
 public class Home extends DrawerBaseActivity {
     ActivityHomeBinding binding;
     ArrayList<QuizWithID> listQuizToan, listQuizTiengAnh, listQuizDoVui;
+    LoadingDialog dialog= new LoadingDialog(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +48,7 @@ public class Home extends DrawerBaseActivity {
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         allocateActivityName("TRANG CHỦ");
+        dialog.startLoading();
         ArrayList<QuizCategory_Home> list = new ArrayList<>();
 
         QuizCategoryAdapter adapter = new QuizCategoryAdapter(this);
@@ -160,18 +166,16 @@ public class Home extends DrawerBaseActivity {
             }
         });
 
-
-
-    }
-
-    ArrayList<QuizWithID> layQuizTheoChuDe(String chuDe, ArrayList<QuizWithID> list) {
-        ArrayList<QuizWithID> listQuiz = new ArrayList<>();
-        for (QuizWithID q : listQuiz) {
-            if (q.getQuiz().getChuDe().equals(chuDe)) {
-                listQuiz.add(q);
+        binding.btnTimKiem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(getApplicationContext(), UC09_TimKiem.class);
+                startActivity(intent);
             }
+        });
 
-        }
-        return listQuiz;
+    dialog.dismissDialog();
+
     }
+
 }

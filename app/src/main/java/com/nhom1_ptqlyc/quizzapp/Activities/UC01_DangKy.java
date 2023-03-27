@@ -1,6 +1,7 @@
 package com.nhom1_ptqlyc.quizzapp.Activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -21,6 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.ktx.Firebase;
+import com.nhom1_ptqlyc.quizzapp.Home;
 import com.nhom1_ptqlyc.quizzapp.R;
 import com.nhom1_ptqlyc.quizzapp.objects.User;
 
@@ -62,12 +64,25 @@ public class UC01_DangKy extends AppCompatActivity {
                     map.put("avatar", null);
                     map.put("isActive", true);
 
+                    SharedPreferences preferences = getSharedPreferences("user_data", MODE_PRIVATE);
+                    SharedPreferences.Editor editor= preferences.edit();
+                    editor.clear();
+                    editor.putString("username", username);
+                    editor.putString("password", pw);
+                    editor.putString("birthday", birth);
+                    editor.putString("gender",gender);
+                    editor.putString("avatar", null);
+                    editor.putString("id",username);
+                    editor.commit();
+
                     DocumentReference documentReference=db.collection("users").document(username);
                     documentReference.set(map)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void unused) {
                                     Toast.makeText(UC01_DangKy.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
+                                    Intent intent= new Intent(getApplicationContext(), Home.class);
+                                    startActivity(intent);
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
@@ -75,6 +90,7 @@ public class UC01_DangKy extends AppCompatActivity {
                                     Toast.makeText(UC01_DangKy.this, "Đăng ký thất bại", Toast.LENGTH_SHORT).show();
                                 }
                             });
+
                 }
             }
         });

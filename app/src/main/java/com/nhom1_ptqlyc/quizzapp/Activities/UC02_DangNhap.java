@@ -3,6 +3,7 @@ package com.nhom1_ptqlyc.quizzapp.Activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +23,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.nhom1_ptqlyc.quizzapp.Home;
 import com.nhom1_ptqlyc.quizzapp.R;
 import com.nhom1_ptqlyc.quizzapp.objects.User;
 
@@ -62,6 +64,8 @@ public class UC02_DangNhap extends AppCompatActivity {
                                     if (userList.get(0).getPassword().equals(pass)){
                                         saveUserPre(userList.get(0), id);
                                         Toast.makeText(UC02_DangNhap.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                                        Intent intent= new Intent(getApplicationContext(), Home.class);
+                                        startActivity(intent);
                                     } else {
                                         Toast.makeText(UC02_DangNhap.this, "Sai mật khẩu", Toast.LENGTH_SHORT).show();
                                     }

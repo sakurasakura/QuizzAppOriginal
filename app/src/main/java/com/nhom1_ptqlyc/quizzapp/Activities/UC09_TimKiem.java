@@ -43,7 +43,7 @@ public class UC09_TimKiem extends DrawerBaseActivity {
         listAllQuiz= new ArrayList<>();
         listQuizSearch = new ArrayList<>();
 
-        adapter = new QuizCardAdapter2(listQuizSearch,listAllQuiz,getApplicationContext());
+        adapter = new QuizCardAdapter2(listQuizSearch,listAllQuiz,UC09_TimKiem.this);
         GridLayoutManager manager = new GridLayoutManager(getApplicationContext(),3);
         binding.layoutKqTimQuiz.setLayoutManager(manager);
         binding.layoutKqTimQuiz.setAdapter(adapter);

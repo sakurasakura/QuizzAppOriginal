@@ -210,6 +210,17 @@ public class UC08_XemTrangCaNhan extends DrawerBaseActivity {
                 openDialog_suaTT();
             }
         });
+        binding.clickToSignOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences sharedPreferences= getSharedPreferences("user_data", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.clear().commit();
+                Intent intent2 = new Intent(getApplicationContext(), UC02_DangNhap.class);
+                startActivity(intent2);
+                Toast.makeText(UC08_XemTrangCaNhan.this, "Đăng xuất thành công", Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 

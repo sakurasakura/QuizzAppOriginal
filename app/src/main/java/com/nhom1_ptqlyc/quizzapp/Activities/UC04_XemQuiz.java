@@ -128,6 +128,15 @@ public class UC04_XemQuiz extends DrawerBaseActivity {
                         }).show();
             }
         });
+        binding.textViewChuDe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),UC10_XemDSQuizTheoChuDe.class);
+                Log.d("Chủ đề", chuDe);
+                intent.putExtra("KEY_CHU_DE",chuDe);
+                startActivity(intent);
+            }
+        });
     }
 
 
