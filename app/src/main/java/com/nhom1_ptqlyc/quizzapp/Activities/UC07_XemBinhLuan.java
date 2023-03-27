@@ -72,13 +72,19 @@ dialog.startLoading();
                 if (task.isSuccessful()){
                     listBinhLuan=task.getResult().toObject(ListBinhLuan.class);
                     if (!listBinhLuan.getListBinhLuan().isEmpty()){
-                        Log.d("ktra listBinhLuan", listBinhLuan.getListBinhLuan().get(0).getNoiDung());
+                        Log.d("ktra listBinhLuan", listBinhLuan.getListBinhLuan().get(0).isShow()+"");
                     }
                     binding.listViewBinhLuan.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
                         @Override
                         public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                            openDialog_suaBL(position);
-                            return true;
+                            if (userID.equals(listBinhLuan.getListBinhLuan().get(position).getIDNguoiTao())){
+                                openDialog_suaBL(position);
+                                return true;
+                            }
+                            else {
+                                return false;
+                            }
+
                         }
                     });
 
@@ -141,6 +147,7 @@ dialog.startLoading();
             window.setGravity(Gravity.CENTER);
         }
         EditText editText_bl = dialog2.findViewById(R.id.edittext_nhapBL);
+        editText_bl.setText(listBinhLuan.getListBinhLuan().get(position).getNoiDung());
 
         Button btn_xacnhan = dialog2.findViewById(R.id.button_xacnhanSua);
         Button btn_xoa = dialog2.findViewById(R.id.button_xoa);
@@ -154,9 +161,10 @@ dialog.startLoading();
                     return;
                 } else {
                     dialog.startLoading();
+                    listBinhLuan.getListBinhLuan().add(new BinhLuan(userID,avatar,binhluan,true));
+                    listBinhLuan.getListBinhLuan().remove(position);
                     DocumentReference documentReference= db.collection("Comment").document(QuizID);
-                    documentReference.update("lisBinhLuan", FieldValue.arrayRemove(listBinhLuan.getListBinhLuan().get(position)));
-                    documentReference.update("listBinhLuan", FieldValue.arrayUnion(new BinhLuan(userID,avatar,binhluan,true)))
+                    documentReference.update("listBinhLuan",listBinhLuan.getListBinhLuan() )
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
@@ -174,6 +182,29 @@ dialog.startLoading();
                         }
                     });
                 }
+            }
+        });
+        btn_xoa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.startLoading();
+                DocumentReference documentReference= db.collection("Comment").document(QuizID);
+                listBinhLuan.getListBinhLuan().remove(position);
+                documentReference.update("listBinhLuan", listBinhLuan.getListBinhLuan())
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()){
+                                    Toast.makeText(UC07_XemBinhLuan.this, "Xóa bình luận thành công", Toast.LENGTH_SHORT).show();
+
+                                    adapter.notifyDataSetChanged();
+                                }else {
+                                    Toast.makeText(UC07_XemBinhLuan.this, "Xóa thất bại", Toast.LENGTH_SHORT).show();
+                                }
+                                dialog.dismissDialog();
+                                dialog2.dismiss();
+                            }
+                        });
             }
         });
         dialog2.show();

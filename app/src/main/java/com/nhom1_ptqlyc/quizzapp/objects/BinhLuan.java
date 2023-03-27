@@ -9,25 +9,11 @@ public class BinhLuan {
     public BinhLuan() {
     }
 
-    public BinhLuan(String IDNguoiTao, String noiDung, boolean isShow) {
-        this.IDNguoiTao = IDNguoiTao;
-        this.noiDung = noiDung;
-        this.isShow = isShow;
-    }
-
     public BinhLuan(String IDNguoiTao, String hinhAnhNguoiTao, String noiDung, boolean isShow) {
         this.IDNguoiTao = IDNguoiTao;
         this.hinhAnhNguoiTao = hinhAnhNguoiTao;
         this.noiDung = noiDung;
         this.isShow = isShow;
-    }
-
-    public String getHinhAnhNguoiTao() {
-        return hinhAnhNguoiTao;
-    }
-
-    public void setHinhAnhNguoiTao(String hinhAnhNguoiTao) {
-        this.hinhAnhNguoiTao = hinhAnhNguoiTao;
     }
 
     public String getIDNguoiTao() {
@@ -36,6 +22,14 @@ public class BinhLuan {
 
     public void setIDNguoiTao(String IDNguoiTao) {
         this.IDNguoiTao = IDNguoiTao;
+    }
+
+    public String getHinhAnhNguoiTao() {
+        return hinhAnhNguoiTao;
+    }
+
+    public void setHinhAnhNguoiTao(String hinhAnhNguoiTao) {
+        this.hinhAnhNguoiTao = hinhAnhNguoiTao;
     }
 
     public String getNoiDung() {
