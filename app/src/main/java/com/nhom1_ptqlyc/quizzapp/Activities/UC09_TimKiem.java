@@ -21,14 +21,18 @@ import com.nhom1_ptqlyc.quizzapp.objects.Quiz;
 import com.nhom1_ptqlyc.quizzapp.objects.QuizWithID;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class UC09_TimKiem extends DrawerBaseActivity {
     ActivityUc09TimKiemBinding binding;
     FirebaseFirestore db;
+    ArrayList<QuizWithID> listAllQuiz;
+    ArrayList<QuizWithID> listQuizSearch;
+    QuizCardAdapter2 adapter;
     LoadingDialog dialog = new LoadingDialog(this);
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected synchronized void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         binding = ActivityUc09TimKiemBinding.inflate(getLayoutInflater());
@@ -36,49 +40,61 @@ public class UC09_TimKiem extends DrawerBaseActivity {
         allocateActivityName("TÌM KIẾM");
         dialog.startLoading();
         db = FirebaseFirestore.getInstance();
-        CollectionReference reference = db.collection("Quiz");
+        listAllQuiz= new ArrayList<>();
+        listQuizSearch = new ArrayList<>();
 
-        ArrayList<QuizWithID> listAllQuiz= new ArrayList<>();
-        ArrayList<QuizWithID> listQuizSearch= new ArrayList<>();
-
-        QuizCardAdapter2 adapter= new QuizCardAdapter2(listQuizSearch,listAllQuiz,getApplicationContext());
+        adapter = new QuizCardAdapter2(listQuizSearch,listAllQuiz,getApplicationContext());
         GridLayoutManager manager = new GridLayoutManager(getApplicationContext(),3);
         binding.layoutKqTimQuiz.setLayoutManager(manager);
         binding.layoutKqTimQuiz.setAdapter(adapter);
 
-        reference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        readData(new FirestoreCallback() {
             @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                                Log.d("Lấy tất cả quiz", "Thành công");
-                                for (QueryDocumentSnapshot doc : task.getResult()) {
-                                    listAllQuiz.add(new QuizWithID(doc.getId(), doc.toObject(Quiz.class)));
-                                }
-                                adapter.notifyDataSetChanged();
-                                dialog.dismissDialog();
-                    binding.searchview.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                        @Override
-                        public boolean onQueryTextSubmit(String query) {
-                            Log.d("KiemTra", listAllQuiz.get(0).getQuizID());
-                            adapter.getFilter().filter(query);
-                            return false;
-                        }
+            public void onCallback(ArrayList<QuizWithID> list) {
 
-                        @Override
-                        public boolean onQueryTextChange(String newText) {
-                            Log.d("KiemTra", listAllQuiz.get(0).getQuizID());
-                            adapter.getFilter().filter(newText);
-                            return false;
-                        }
-                    });
-                            } else {
-                                Log.d("Lấy tất cả quiz", "Thất bại");
-                                dialog.dismissDialog();
-                            }
+                binding.searchview.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                    @Override
+                    public boolean onQueryTextSubmit(String query) {
+                        Log.d("KiemTra", listAllQuiz.get(0).getQuizID());
+                        adapter.getFilter().filter(query);
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onQueryTextChange(String newText) {
+                        Log.d("KiemTra", listAllQuiz.get(0).getQuizID());
+                        adapter.getFilter().filter(newText);
+                        return false;
+                    }
+                });
+                Log.d("listAllQuiz", listAllQuiz.isEmpty()+"");
             }
         });
-
    }
 
+   private void readData(FirestoreCallback firestoreCallback) {
+       db.collection("Quiz").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+           @Override
+           public void onComplete(@NonNull Task<QuerySnapshot> task) {
+               if (task.isSuccessful()) {
+                   Log.d("Lấy tất cả quiz", "Thành công");
+                   for (QueryDocumentSnapshot doc : task.getResult()) {
+                       listAllQuiz.add(new QuizWithID(doc.getId(), doc.toObject(Quiz.class)));
+                       Log.d("Lấy tất cả quiz", listAllQuiz.toString());
+                   }
+                   adapter.notifyDataSetChanged();
+                   dialog.dismissDialog();
+                   firestoreCallback.onCallback(listAllQuiz);
+               } else {
+                   Log.d("Lấy tất cả quiz", "Thất bại");
+                   dialog.dismissDialog();
+               }
+           }
+       });
+   }
+
+   private interface FirestoreCallback {
+        void onCallback(ArrayList<QuizWithID> list);
+   }
 
 }

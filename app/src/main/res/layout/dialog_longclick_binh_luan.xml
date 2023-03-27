@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <TextView
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/textview1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sửa bình luận"
+        android:textColor="@color/second_purple"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/edittext_nhapBL"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textview1"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:layout_marginVertical="20dp"
+        android:background="@drawable/edittext_background_purplestroke"
+        android:hint="Nhập bình luận"
+        android:inputType="text"
+        android:padding="15dp"
+        android:textColorHint="@color/purple_200"
+        android:textStyle="italic" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edittext_nhapBL"
+        android:layout_centerInParent="true">
+
+        <Button
+            android:id="@+id/button_xacnhanSua"
+            style="@style/next_button_purple"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="5dp"
+            android:text="Xác nhận"
+            android:textStyle="bold"></Button>
+
+        <Button
+            android:id="@+id/button_xoa"
+            style="@style/next_button_purple"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="5dp"
+            android:layout_toRightOf="@id/button_xacnhanSua"
+            android:text="XÓA"
+            android:textStyle="bold"></Button>
+    </LinearLayout>
+
+
+</RelativeLayout>

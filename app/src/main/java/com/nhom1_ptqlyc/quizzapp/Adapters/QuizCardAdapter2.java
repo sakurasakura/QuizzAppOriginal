@@ -48,7 +48,7 @@ public class QuizCardAdapter2 extends RecyclerView.Adapter<QuizCardAdapter2.Quiz
     Context mContext;
 
     public QuizCardAdapter2(List<QuizWithID> mList, List<QuizWithID> mListOld, Context mContext) {
-        this.mList = mList;
+        this.mList = mListOld;
         this.mListOld = mListOld;
         this.mContext = mContext;
     }
