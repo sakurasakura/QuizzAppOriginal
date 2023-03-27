@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".Activities.UC09_TimKiem">
+<RelativeLayout
+    android:layout_margin="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <EditText
+        android:layout_toLeftOf="@id/imgbtn_searchTen"
+        android:id="@+id/edt_timKiemTheoTen"
+        android:layout_alignParentLeft="true"
+        android:hint="Tìm kiếm theo tên quiz"
+        android:textColorHint="@color/second_purple"
+        android:textColor="@color/second_purple"
+        android:padding="10dp"
+        android:textStyle="italic"
+        android:background="@drawable/edittext_background_purplestroke"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <ImageButton
+        android:layout_marginLeft="5dp"
+        android:id="@+id/imgbtn_searchTen"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/icon_tim_kiem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</RelativeLayout>
+    <RelativeLayout
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:layout_toLeftOf="@id/imgbtn_searchUser"
+            android:id="@+id/edt_timKiemUser"
+            android:layout_alignParentLeft="true"
+            android:hint="Tìm kiếm người dùng"
+            android:textColorHint="@color/second_purple"
+            android:textColor="@color/second_purple"
+            android:padding="10dp"
+            android:textStyle="italic"
+            android:background="@drawable/edittext_background_purplestroke"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <ImageButton
+            android:layout_marginLeft="5dp"
+            android:id="@+id/imgbtn_searchUser"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/icon_tim_kiem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_gravity="center"
+        android:id="@+id/layout_kq_timQuiz"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

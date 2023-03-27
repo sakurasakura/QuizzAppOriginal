@@ -122,6 +122,8 @@ public class UC05_LamQuiz extends DrawerBaseActivity {
         Intent intent = new Intent(getApplicationContext(),UC06_KetQuaLamQuiz.class);
         intent.putExtra("KEY_QUIZ_ID",QuizID);
         intent.putExtra("KEY_DIEM",tongDiem);
+        intent.putExtra("KEY_TEN_QUIZ",quiz.getTen());
+        intent.putExtra("KEY_CD_QUIZ",quiz.getChuDe());
         startActivity(intent);
     }
 

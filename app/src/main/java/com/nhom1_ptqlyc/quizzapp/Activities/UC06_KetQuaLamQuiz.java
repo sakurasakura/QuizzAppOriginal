@@ -30,6 +30,7 @@ import com.nhom1_ptqlyc.quizzapp.objects.Quiz;
 import com.nhom1_ptqlyc.quizzapp.objects.QuizUser;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class UC06_KetQuaLamQuiz extends DrawerBaseActivity {
     ActivityUc06KetQuaLamQuizBinding binding;
@@ -37,7 +38,7 @@ public class UC06_KetQuaLamQuiz extends DrawerBaseActivity {
     float diem;
     String QuizUserID;
     Quiz quiz;
-
+String tenQuiz, cdQuiz;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +47,8 @@ public class UC06_KetQuaLamQuiz extends DrawerBaseActivity {
         allocateActivityName("KẾT QUẢ");
 
         QuizID = getIntent().getStringExtra("KEY_QUIZ_ID");
+        tenQuiz = getIntent().getStringExtra("KEY_TEN_QUIZ");
+        cdQuiz = getIntent().getStringExtra("KEY_CD_QUIZ");
         diem = getIntent().getFloatExtra("KEY_DIEM", (float) 0.0);
         //diem=Float.valueOf(diemne);
 
@@ -102,10 +105,12 @@ public class UC06_KetQuaLamQuiz extends DrawerBaseActivity {
                                 }
                             }
                         } else {
-                            collectionReference.add(new QuizUser(QuizID, userID, diem, diem, 0)).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                            collectionReference.add(new QuizUser(QuizID,tenQuiz, cdQuiz, userID, diem, diem, 0)).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                 @Override
                                 public void onSuccess(DocumentReference documentReference) {
                                     Log.d("add QuizUser", "Thành công");
+                                    binding.textViewShowDiemCaoNhat.setText("Điểm cao nhất: " + diem + ".");
+                                    binding.textViewDiemLanNay.setText("Điểm lần này đạt được là: "+diem + ".");
                                 }
                             });
                         }
@@ -114,8 +119,8 @@ public class UC06_KetQuaLamQuiz extends DrawerBaseActivity {
 
         ArrayList<QuizUser> listBXH = new ArrayList<>();
 
-
-        db.collection("quiz_user").orderBy("soDiemCaoNhat", Query.Direction.DESCENDING)
+        Log.d("QuizId", QuizID);
+        db.collection("quiz_user").whereEqualTo("idQuiz",QuizID)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -127,6 +132,7 @@ public class UC06_KetQuaLamQuiz extends DrawerBaseActivity {
                                 listBXH.add(document.toObject(QuizUser.class));
 
                             }
+                            listBXH.sort(Comparator.comparing((QuizUser::getSoDiemCaoNhat)));
                             BXHadapter bxHadapter = new BXHadapter(getApplicationContext(), listBXH, R.layout.row_bxh);
                             binding.listViewBxh.setAdapter(bxHadapter);
                         } else {

@@ -237,8 +237,6 @@ public class UC03_TaoQuiz extends DrawerBaseActivity {
             @Override
             public void onSuccess(DocumentReference documentReference) {
                 String quizID= documentReference.getId();
-                DocumentReference reference1 = db.collection("users").document(userID);
-                reference1.update("listQuiz", FieldValue.arrayUnion(quizID));
                 Map<String,Object> map=new HashMap<>();
                 map.put("listBinhLuan",new ArrayList<BinhLuan>());
                 db.collection("Comment").document(quizID).set(map);

@@ -2,6 +2,7 @@ package com.nhom1_ptqlyc.quizzapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -109,6 +110,7 @@ public class Home extends DrawerBaseActivity {
 
         QuizCategoryAdapter adapter3 = new QuizCategoryAdapter(this);
 
+
         LinearLayoutManager manager3 = new LinearLayoutManager(this.getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         binding.layoutQuizCategoryCollection3.setLayoutManager(manager3);
         binding.layoutQuizCategoryCollection3.setAdapter(adapter3);
@@ -134,7 +136,8 @@ public class Home extends DrawerBaseActivity {
 
         QuizCategoryAdapter adapter4 = new QuizCategoryAdapter(this);
 
-        LinearLayoutManager manager4 = new LinearLayoutManager(this.getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        //LinearLayoutManager manager4 = new LinearLayoutManager(this.getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        GridLayoutManager manager4= new GridLayoutManager(this.getApplicationContext(),1,GridLayoutManager.HORIZONTAL,false);
         binding.layoutQuizCategoryCollection4.setLayoutManager(manager4);
         binding.layoutQuizCategoryCollection4.setAdapter(adapter4);
 
@@ -148,8 +151,8 @@ public class Home extends DrawerBaseActivity {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         listQuizDoVui.add(new QuizWithID(document.getId(), document.toObject(Quiz.class)));
                     }
-                    list4.add(new QuizCategory_Home("Quiz đố vui", listQuizHot));
-                    adapter3.setData(list3);
+                    list4.add(new QuizCategory_Home("Quiz đố vui", listQuizDoVui));
+                    adapter4.setData(list4);
                     Log.d("Lấy 10 quiz Đố vui", listQuizDoVui.get(0).getQuizID());
                 } else {
                     Log.d("Lấy 10 quiz Đố vui", "Thất bại");

@@ -7,10 +7,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
 
 import com.google.android.material.navigation.NavigationView;
@@ -20,17 +22,17 @@ public class DrawerBaseActivity extends AppCompatActivity implements NavigationV
 
     @Override
     public void setContentView(View view) {
-        mDrawerLayout=(DrawerLayout) getLayoutInflater().inflate(R.layout.activity_drawer_base,null);
+        mDrawerLayout = (DrawerLayout) getLayoutInflater().inflate(R.layout.activity_drawer_base, null);
         FrameLayout container = mDrawerLayout.findViewById(R.id.ActivityContainer);
         container.addView(view);
         super.setContentView(mDrawerLayout);
 
-        Toolbar toolbar= mDrawerLayout.findViewById(R.id.toolBar);
+        Toolbar toolbar = mDrawerLayout.findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);
         NavigationView navigationView = mDrawerLayout.findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,mDrawerLayout,R.string.open_drawer, R.string.close_drawer);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open_drawer, R.string.close_drawer);
         mDrawerLayout.addDrawerListener(toggle);
         toggle.syncState();
     }
@@ -38,18 +40,19 @@ public class DrawerBaseActivity extends AppCompatActivity implements NavigationV
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-       switch (item.getItemId()){
-           case R.id.trangChu:
-               Intent intent = new Intent(getApplicationContext(),Home.class);
-               startActivity(intent);
-               break;
+        switch (item.getItemId()) {
+            case R.id.trangChu:
+                Intent intent = new Intent(getApplicationContext(), Home.class);
+                startActivity(intent);
+                break;
 
-       }
+        }
         return true;
     }
-    public void allocateActivityName(String name){
-        if (getSupportActionBar()!=null){
-            getSupportActionBar().setTitle(name+"");
+
+    public void allocateActivityName(String name) {
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(name + "");
         }
     }
 }

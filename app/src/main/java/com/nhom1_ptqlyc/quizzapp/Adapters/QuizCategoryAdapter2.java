@@ -16,18 +16,18 @@ import com.nhom1_ptqlyc.quizzapp.objects.QuizCategory_Home;
 
 import java.util.ArrayList;
 
-public class QuizCategoryAdapter extends RecyclerView.Adapter<QuizCategoryAdapter.QuizCategoryViewHolder> {
+public class QuizCategoryAdapter2 extends RecyclerView.Adapter<QuizCategoryAdapter2.QuizCategoryViewHolder> {
 
 
     Context mContext;
     ArrayList<QuizCategory_Home> listCategory;
 
-    public QuizCategoryAdapter(Context mContext, ArrayList<QuizCategory_Home> listCategory) {
+    public QuizCategoryAdapter2(Context mContext, ArrayList<QuizCategory_Home> listCategory) {
         this.mContext = mContext;
         this.listCategory = listCategory;
     }
 
-    public QuizCategoryAdapter(Context mContext) {
+    public QuizCategoryAdapter2(Context mContext) {
         this.mContext = mContext;
     }
 
@@ -50,8 +50,8 @@ public class QuizCategoryAdapter extends RecyclerView.Adapter<QuizCategoryAdapte
             return;
         }
         holder.textView_category.setText(category.getCategory());
-        LinearLayoutManager manager = new LinearLayoutManager(mContext,LinearLayoutManager.HORIZONTAL,false);
-        //GridLayoutManager manager = new GridLayoutManager(mContext,1,GridLayoutManager.HORIZONTAL,false);
+        //LinearLayoutManager manager = new LinearLayoutManager(mContext,LinearLayoutManager.HORIZONTAL,false);
+        GridLayoutManager manager = new GridLayoutManager(mContext,2,GridLayoutManager.HORIZONTAL,false);
         holder.recyclerView_quiz_collection.setLayoutManager(manager);
         QuizCardAdapter quizCardAdapter = new QuizCardAdapter();
         quizCardAdapter.setData(category.getQuizWithIDS(),mContext);

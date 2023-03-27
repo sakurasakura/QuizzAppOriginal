@@ -57,9 +57,8 @@ public class UC01_DangKy extends AppCompatActivity {
                     map.put("username", username.trim());
                     map.put("password", pw.trim());
                     map.put("isAdmin", false);
-                    map.put("birth", birth);
+                    map.put("birthday", birth);
                     map.put("gender", gender);
-                    map.put("listQuiz", null);
                     map.put("avatar", null);
                     map.put("isActive", true);
 

@@ -26,7 +26,7 @@
         android:id="@+id/radioGroup_cauTraLoi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textView_thuTuCauHoi"
+        android:layout_below="@id/textView_ndCauHoi"
         android:orientation="vertical">
 
         <RadioButton

@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -59,12 +60,16 @@ public class UC07_XemBinhLuan extends DrawerBaseActivity {
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()){
                     listBinhLuan=task.getResult().toObject(ListBinhLuan.class);
-                    Log.d("ktra listBinhLuan", listBinhLuan.getListBinhLuan().get(0).getNoiDung());
-                    adapter= new BinhLuanAdapter(getApplicationContext(),listBinhLuan);
-                    binding.listViewBinhLuan.setAdapter(adapter);
+                    if (!listBinhLuan.getListBinhLuan().isEmpty()){
+                        Log.d("ktra listBinhLuan", listBinhLuan.getListBinhLuan().get(0).getNoiDung());
+
+                    }
+
                 }else {
                     Log.e("Lấy bình luận", "Thất bại");
                 }
+                adapter= new BinhLuanAdapter(getApplicationContext(),listBinhLuan);
+                binding.listViewBinhLuan.setAdapter(adapter);
                // return null;
             }
         });
@@ -81,6 +86,9 @@ public class UC07_XemBinhLuan extends DrawerBaseActivity {
                     adapter.notifyDataSetChanged();
                     pushCommentToDB(binhLuan);
                 }
+                binding.editTextThemBinhLuan.getText().clear();
+                InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+                imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
             }
         });
     }

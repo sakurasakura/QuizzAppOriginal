@@ -79,20 +79,20 @@ public class UC03_1_SuaQuiz extends DrawerBaseActivity {
         binding = ActivityUc031SuaQuizBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         allocateActivityName("SỬA QUIZ");
-dialog= new LoadingDialog(this);
+        dialog = new LoadingDialog(this);
         quiz = (Quiz) getIntent().getSerializableExtra("KEY_QUIZ");
         quizID = getIntent().getStringExtra("KEY_QUIZ_ID");
         Log.d("Kiểm tra quiz nhận", quiz.getTen());
-        tenQuiz=quiz.getTen();
-        chuDe=quiz.getChuDe();
-        gioiHanThoiGian= quiz.getGioiHanThoiGian();
-        hinhAnhURL=quiz.getHinhAnhURL();
-        soCauHoi=quiz.getSoLuongCauHoi();
-listCauHoi=quiz.getListCauHoi();
+        tenQuiz = quiz.getTen();
+        chuDe = quiz.getChuDe();
+        gioiHanThoiGian = quiz.getGioiHanThoiGian();
+        hinhAnhURL = quiz.getHinhAnhURL();
+        soCauHoi = quiz.getSoLuongCauHoi();
+        listCauHoi = quiz.getListCauHoi();
 
         binding.edtTenQuiz.setText(tenQuiz);
         binding.edtTenChuDe.setText(chuDe);
-        binding.edtThoiGian.setText(gioiHanThoiGian+"");
+        binding.edtThoiGian.setText(gioiHanThoiGian + "");
         isImageReselect = false;
         Picasso.get().load(quiz.getHinhAnhURL()).into(binding.imageViewViewQuizImage);
         for (int i = 0; i < soCauHoi; i++) {
@@ -166,47 +166,48 @@ listCauHoi=quiz.getListCauHoi();
 
 
     }
-    void themView_themCauHoi(){
-        soCauHoi=soCauHoi+1;
-        View inflater = LayoutInflater.from(this).inflate(R.layout.row_them_cau_hoi,null);
-        binding.layoutCauHoi.addView(inflater,binding.layoutCauHoi.getChildCount());
+
+    void themView_themCauHoi() {
+        soCauHoi = soCauHoi + 1;
+        View inflater = LayoutInflater.from(this).inflate(R.layout.row_them_cau_hoi, null);
+        binding.layoutCauHoi.addView(inflater, binding.layoutCauHoi.getChildCount());
     }
 
-    void themCauHoi(){
+    void themCauHoi() {
 
-        for (int i=0;i<soCauHoi;i++){
-            ArrayList<CauTraLoi> listCauTraLoi= new ArrayList<>();
+        for (int i = 0; i < soCauHoi; i++) {
+            ArrayList<CauTraLoi> listCauTraLoi = new ArrayList<>();
             View v = ((ViewGroup) binding.layoutCauHoi).getChildAt(i);
-            EditText edt_ndCauHoi= v.findViewById(R.id.editText_nhapCauHoi);
+            EditText edt_ndCauHoi = v.findViewById(R.id.editText_nhapCauHoi);
             String noiDungCauHoi = edt_ndCauHoi.getText().toString();
             //xuly cautraloi 1
-            EditText edt_ndCauTraLoi= v.findViewById(R.id.editText_nhapCauTraLoi1);
+            EditText edt_ndCauTraLoi = v.findViewById(R.id.editText_nhapCauTraLoi1);
             String noiDungCauTraLoi = edt_ndCauTraLoi.getText().toString();
             RadioGroup rg = v.findViewById(R.id.radioGroup_cauTraLoi1);
             int checked = rg.getCheckedRadioButtonId();
-            String dungsai = ((RadioButton)v.findViewById(checked)).getText().toString();
-            CauTraLoi ctl= new CauTraLoi(noiDungCauTraLoi,dungsai);
+            String dungsai = ((RadioButton) v.findViewById(checked)).getText().toString();
+            CauTraLoi ctl = new CauTraLoi(noiDungCauTraLoi, dungsai);
             listCauTraLoi.add(ctl);
 
             //xulyb cautraloi2
-            edt_ndCauTraLoi= v.findViewById(R.id.editText_nhapCauTraLoi2);
+            edt_ndCauTraLoi = v.findViewById(R.id.editText_nhapCauTraLoi2);
             noiDungCauTraLoi = edt_ndCauTraLoi.getText().toString();
             rg = v.findViewById(R.id.radioGroup_cauTraLoi2);
             checked = rg.getCheckedRadioButtonId();
-            dungsai = ((RadioButton)v.findViewById(checked)).getText().toString();
-            ctl= new CauTraLoi(noiDungCauTraLoi,dungsai);
+            dungsai = ((RadioButton) v.findViewById(checked)).getText().toString();
+            ctl = new CauTraLoi(noiDungCauTraLoi, dungsai);
             listCauTraLoi.add(ctl);
 
             //xulyb cautraloi3
-            edt_ndCauTraLoi= v.findViewById(R.id.editText_nhapCauTraLoi3);
+            edt_ndCauTraLoi = v.findViewById(R.id.editText_nhapCauTraLoi3);
             noiDungCauTraLoi = edt_ndCauTraLoi.getText().toString();
             rg = v.findViewById(R.id.radioGroup_cauTraLoi3);
             checked = rg.getCheckedRadioButtonId();
-            dungsai = ((RadioButton)v.findViewById(checked)).getText().toString();
-            ctl= new CauTraLoi(noiDungCauTraLoi,dungsai);
+            dungsai = ((RadioButton) v.findViewById(checked)).getText().toString();
+            ctl = new CauTraLoi(noiDungCauTraLoi, dungsai);
             listCauTraLoi.add(ctl);
 
-            listCauHoi.add(new CauHoi(noiDungCauHoi,listCauTraLoi));
+            listCauHoi.add(new CauHoi(noiDungCauHoi, listCauTraLoi));
             Log.d("Dap an cau", listCauTraLoi.get(0).getNoiDung());
         }
 
@@ -220,11 +221,11 @@ listCauHoi=quiz.getListCauHoi();
         long luotlam = quiz.getLuotLam();
         float rating = 0;
         String tenDeTai = ((EditText) binding.edtTenChuDe).getText().toString();
-        gioiHanThoiGian= Integer.parseInt(binding.edtThoiGian.getText().toString());
+        gioiHanThoiGian = Integer.parseInt(binding.edtThoiGian.getText().toString());
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         DocumentReference reference = db.collection("Quiz").document(quizID);
-        if (isImageReselect){
+        if (isImageReselect) {
             StorageReference storageReference = FirebaseStorage.getInstance().getReference();
             StorageReference photoRef = storageReference.child(quiz.getHinhAnhURL());
             UploadTask uploadTask = photoRef.putFile(imgURI);
@@ -251,23 +252,23 @@ listCauHoi=quiz.getListCauHoi();
                 @Override
                 public void onSuccess(Uri uri) {
                     hinhAnhURL = uri.toString();
-                    Log.d("complete uri",hinhAnhURL);
-                    reference.update("chuDe",chuDe,"gioiHanThoiGian",gioiHanThoiGian,"hinhAnhURL",hinhAnhURL,"listCauHoi",listCauHoi,"soLuongCauHoi",soCauHoi,"ten", tenQuiz);
+                    Log.d("complete uri", hinhAnhURL);
+                    reference.update("chuDe", chuDe, "gioiHanThoiGian", gioiHanThoiGian, "hinhAnhURL", hinhAnhURL, "listCauHoi", listCauHoi, "soLuongCauHoi", soCauHoi, "ten", tenQuiz);
                     dialog.dismissDialog();
-                    Intent intent= new Intent(getApplicationContext(),UC04_XemQuiz.class);
-                    intent.putExtra("KEY_QUIZ_WITH_ID",quizID);
-                   startActivity(intent);
+                    Intent intent = new Intent(getApplicationContext(), UC04_XemQuiz.class);
+                    intent.putExtra("KEY_QUIZ_WITH_ID", quizID);
+                    startActivity(intent);
                 }
             });
 
-        }else {
+        } else {
             Log.d("úpdate quiz", listCauHoi.get(1).getListCauTraLoi().get(2).getNoiDung().toString());
-            reference.update("chuDe",chuDe,"gioiHanThoiGian",gioiHanThoiGian,"listCauHoi",listCauHoi,"soLuongCauHoi",soCauHoi,"ten", tenQuiz);
+            reference.update("chuDe", chuDe, "gioiHanThoiGian", gioiHanThoiGian, "listCauHoi", listCauHoi, "soLuongCauHoi", soCauHoi, "ten", tenQuiz);
             dialog.dismissDialog();
             Toast.makeText(UC03_1_SuaQuiz.this, "Update thành công", Toast.LENGTH_SHORT).show();
-            Intent intent= new Intent(getApplicationContext(),UC04_XemQuiz.class);
-            intent.putExtra("KEY_QUIZ_WITH_ID",quizID);
-           startActivity(intent);
+            Intent intent = new Intent(getApplicationContext(), UC04_XemQuiz.class);
+            intent.putExtra("KEY_QUIZ_WITH_ID", quizID);
+            startActivity(intent);
         }
 
     }

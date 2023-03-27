@@ -79,6 +79,7 @@
             android:textStyle="italic" />
 
         <RadioButton
+            android:buttonTint="@color/third_purple"
             android:id="@+id/radiobutton_nu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

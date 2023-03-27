@@ -49,7 +49,7 @@ public class UC04_XemQuiz extends DrawerBaseActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityUc04XemQuizBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        allocateActivityName("LÀM QUIZ");
+        allocateActivityName("XEM QUIZ");
 
         SharedPreferences preferences= getSharedPreferences("user_data",MODE_PRIVATE);
         thisUser= preferences.getString("username","");

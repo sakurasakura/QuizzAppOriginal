@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:paddingHorizontal="10dp"
+    android:layout_height="wrap_content">
+<TextView
+    android:textStyle="italic|bold"
+    android:textSize="20sp"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentTop="true"
+    android:textColor="@color/second_purple"
+    android:text="Đây là tên quiz dài tối đa 1 dòng thôi nhaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    android:maxLength="35"
+    android:id="@+id/tv_tenQuiz"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"/>
+    <TextView
+        android:textSize="15sp"
+        android:layout_below="@id/tv_tenQuiz"
+        android:layout_alignParentLeft="true"
+        android:textColor="@color/second_purple"
+        android:text="Chủ Đề Quiz"
+        android:textStyle="italic"
+        android:maxLines="1"
+        android:id="@+id/tv_cdQuiz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <LinearLayout
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/textView_diemCao"
+            android:textColor="@color/second_purple"
+            android:textSize="15sp"
+            android:text="100"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+</RelativeLayout>

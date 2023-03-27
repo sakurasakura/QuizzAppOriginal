@@ -91,6 +91,7 @@ public class UC02_DangNhap extends AppCompatActivity {
         editor.clear();
         editor.putString("username", user.getUsername());
         editor.putString("password", user.getPassword());
+        Log.d("birthday", user.getBirthday()+"");
         editor.putString("birthday", user.getBirthday());
         editor.putString("gender", user.getGender());
         editor.putString("avatar", user.getAvatar());
